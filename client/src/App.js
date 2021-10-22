@@ -1,66 +1,43 @@
 import './App.css';
-import React, {useState} from 'react';
+import React, {useState, Component} from 'react';
 import Axios from 'axios';
+import { CssBaseline, Grid } from '@material-ui/core';
 
-function App() {
+import Map from './components/Map/Map';
 
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
-  const [username, setUsername] = useState('')
-  const [email, setEmail] = useState('')
-
-  const submitUser = () => {
-    Axios.post('http://localhost:3001/api/insert/', {
-      firstName: firstName,
-      lastName: lastName,
-      username: username,
-      email: email,
-    }).then(() => {
-      alert("successful insert")
-    })
-  }
+const App = () => {
 
   return (
-    <div className="App">
-      <h1>
-        Restaurant Recommendation and Tracker
-      </h1>
-      <div className="login-form">
-        <label> Login: </label>
-        <input 
-          type="text" 
-          name="firstName" 
-          onChange={(e)=>{
-            setFirstName(e.target.value)
-          }} 
-        />
-        <input 
-          type="text" 
-          name="lastName" 
-          onChange={(e)=>{
-            setLastName(e.target.value)
-          }} 
-        />
-        <input 
-          type="text" 
-          name="username" 
-          onChange={(e)=>{
-            setUsername(e.target.value)
-          }} 
-        />
-        <input 
-          type="text" 
-          name="email" 
-          onChange={(e)=>{
-            setEmail(e.target.value)
-          }} 
-        />
-
-        <button onClick={submitUser}> Submit </button>
-
-      </div>
-    </div>
+    <>
+      <CssBaseline />
+      <Grid container spacing={3} style={{width: '100%'}}>
+        <Grid item xs={12} md={4}>
+          <h1> Items </h1>
+        </Grid>
+        <Grid item xs={12} md={8}>
+          <Map/>
+        </Grid>
+      </Grid>
+    </>
   );
 }
 
 export default App;
+
+
+
+// const [firstName, setFirstName] = useState('')
+//   const [lastName, setLastName] = useState('')
+//   const [username, setUsername] = useState('')
+//   const [email, setEmail] = useState('')
+
+//   const submitUser = () => {
+//     Axios.post('http://localhost:3001/api/insert/', {
+//       firstName: firstName,
+//       lastName: lastName,
+//       username: username,
+//       email: email,
+//     }).then(() => {
+//       alert("successful insert")
+//     })
+//   }
