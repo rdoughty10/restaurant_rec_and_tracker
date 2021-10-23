@@ -55,7 +55,6 @@ function App() {
             setEmail(e.target.value)
           }} 
         />
-
         <button onClick={submitUser}> Submit </button>
 
       </div>
