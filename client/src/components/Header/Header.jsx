@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Autocomplete } from '@react-google-maps/api';
-import { AppBar, Toolbar, Typography, InputBase, Box } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, MenuItem, InputLabel, FormControl, Select} from '@material-ui/core';
 import { mergeClasses } from '@material-ui/styles';
 import SearchIcon from '@material-ui/icons/Search';
 
@@ -8,6 +8,7 @@ import useStyles from './styles';
 
 const Header = () => {
     const classes = useStyles();
+    const [more, setType] = useState('');
 
     return (
         <AppBar position="static">
@@ -15,19 +16,14 @@ const Header = () => {
                 <Typography variant="h5" className={classes.title}>
                     Restaurant Recommendation and Tracking System
                 </Typography>
-                <Box display="flex">
-                    <Typography variant="h6" className={classes.title}>
-                        Help
-                    </Typography>
-                    {/* <Autocomplete> */}
-                        <div className={classes.search}>
-                            <div className={classes.searchIcon}>
-                                <SearchIcon />
-                            </div>    
-                            <InputBase placeholder="Search..." classes={{ root: classes.inputRoot, input: classes.inputInput }} />
-                        </div>
-                    {/* </Autocomplete> */}
-                </Box>
+                <FormControl className={classes.formControl}>
+                <InputLabel>More</InputLabel>
+                <Select value = {more} onChange={(e) => setType(e.target.value)}>
+                    <MenuItem value="login">Login</MenuItem>
+                    <MenuItem value="help">Help</MenuItem>
+                    <MenuItem value="about">About/FAQ</MenuItem>
+                </Select>
+            </FormControl>
             </Toolbar>
         </AppBar>
     );
