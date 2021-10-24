@@ -3,6 +3,7 @@ import React, {useState, Component} from 'react';
 import Axios from 'axios';
 import { CssBaseline, Grid } from '@material-ui/core';
 
+import Header from './components/Header/Header';
 import Map from './components/Map/Map';
 
 const App = () => {
@@ -10,6 +11,7 @@ const App = () => {
   return (
     <>
       <CssBaseline />
+      <Header />
       <Grid container spacing={3} style={{width: '100%'}}>
         <Grid item xs={12} md={4}>
           <h1> Items </h1>
