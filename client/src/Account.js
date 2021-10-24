@@ -73,7 +73,7 @@ function Account() {
                 setEmail(e.target.value)
             }}
             />
-          {/* Password Box */}
+          {/* Password Box 
           <label for = "password"><b>Password: </b></label>
             <input
             type = "text"
