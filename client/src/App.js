@@ -1,27 +1,39 @@
 import './App.css';
-import React, {useState, Component} from 'react';
-import Axios from 'axios';
-import { CssBaseline, Grid } from '@material-ui/core';
+// import React, {useState, Component} from 'react';
+// import Axios from 'axios';
+// import { CssBaseline, Grid } from '@material-ui/core';
 
-import Header from './components/Header/Header';
-import Map from './components/Map/Map';
-import List from './components/List/List';
+// import Header from './components/Header/Header';
+// import Map from './components/Map/Map';
 
-const App = () => {
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import About from "./components/Pages/About"
+import Home from "./components/Pages/Home"
+
+function App(){
 
   return (
-    <>
-      <CssBaseline />
-      <Header />
-      <Grid container spacing={3} style={{width: '100%'}}>
-        <Grid item xs={12} md={4}>
-          <List/>
-        </Grid>
-        <Grid item xs={12} md={8}>
-          <Map/>
-        </Grid>
-      </Grid>
-    </>
+    
+      <Router>
+        <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/about" exact component={About} />
+        </Switch>
+      </Router> 
+
+
+    // <>
+    //   <CssBaseline />
+    //   <Header />
+    //   <Grid container spacing={3} style={{width: '100%'}}>
+    //     <Grid item xs={12} md={4}>
+    //       <h1> Items </h1>
+    //     </Grid>
+    //     <Grid item xs={12} md={8}>
+    //       <Map/>
+    //     </Grid>
+    //   </Grid>
+    // </>
   );
 }
 

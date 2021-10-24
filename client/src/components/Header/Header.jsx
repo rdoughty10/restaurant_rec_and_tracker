@@ -6,6 +6,7 @@ import SearchIcon from '@material-ui/icons/Search';
 
 import useStyles from './styles';
 
+
 const Header = () => {
     const classes = useStyles();
     const [more, setType] = useState('');
@@ -28,5 +29,6 @@ const Header = () => {
         </AppBar>
     );
 }
+
 
 export default Header;
