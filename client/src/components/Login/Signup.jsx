@@ -1,12 +1,16 @@
 import React, {useState} from 'react';
 import Axios from 'axios';
 
+import Header from '../Header/Header';
+
 /*
 page for user account creation 
 */
 /*
 function for class 
 */
+
+
 function Signup() {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -14,18 +18,19 @@ function Signup() {
     const [password, setPassword] = useState('');
 
     const submitUser = () => (
-      Axios.post('http://localhost:3001/api/insert/', {
+      Axios.post('http://localhost:3001/api/user/new', {
         firstName: firstName,
         lastName: lastName,
         email: email,
         password: password,
       }).then(() => {
-        alert("successful insert");
+        alert("successful registration");
       })
     )
 
     return (
       <div className ="signup">
+        <Header/>
         <h1> Sign Up </h1>
         <p>Enter your your information to create an account.</p>
         <hr></hr>
@@ -75,7 +80,7 @@ function Signup() {
 
           <div class = "clearfix">
             <button type = "button" class="cancelbutton">Cancel</button>
-            <button type= "submit" class= "signupbutton">Sign Up</button>
+            <button type= "submit" class= "signupbutton" onClick={submitUser}>Sign Up</button>
           </div>
         </div>
       </div>

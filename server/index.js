@@ -8,25 +8,36 @@ const db = mysql.createPool({
     host: "localhost", 
     user: "root",
     password: "password",
-    database: "restaurantappdatabase",
+    database: "restaurantapp",
 });
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.json());
 app.use(cors());
 
-app.post('/api/insert', (req, res) => {
-    const firstName = req.body.firstName
-    const lastName = req.body.lastName
-    const username = req.body.username
-    const email = req.body.email
+app.get("/api/user/get", (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
 
-    const sqlInsert = "INSERT INTO login (firstName, lastName, username, email) VALUES (?,?,?,?)"
-    db.query(sqlInsert, [firstName, lastName, username, email], (err, result) => {
-        console.log(result)
-    });
-});
+    const sqlSelect = "SELECT * FROM users WHERE email = (?) AND password = (?);"
+    db.query(sqlSelect, [email, password], (err, result) => {
+        console.log(result);
+        console.log("Welcome User")
+    })
+})
 
+app.post('/api/user/new', (req, res) => {
+
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
+    const email = req.body.email;
+    const password = req.body.password;
+
+    const sqlInsert = "INSERT INTO users (firstName, lastName, email, password) VALUES (?,?,?,?);"
+    db.query(sqlInsert, [firstName, lastName, email, password], (err, result) => {
+        console.log(result);
+    })
+})
 
 app.listen(3001, () => {
     console.log("running on port 3001")

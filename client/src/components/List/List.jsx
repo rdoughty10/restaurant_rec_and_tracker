@@ -10,7 +10,7 @@ const List = () => {
     const places = [{name: 'Location1'}, {name: 'Location2'},{name: 'Location3'}];
     return (
         <div className={classes.container}>
-            <h1>List</h1>
+            <h1>Restaurants</h1>
             <Typography variant="h4">Visited and Recommended Restaurants</Typography>
             <FormControl className={classes.formControl}>
                 <InputLabel>Type</InputLabel>
