@@ -10,8 +10,6 @@ function Login() {
 
     const getUser = () => (
       Axios.post('http://localhost:3001/api/user/get', {
-        firstName: firstName,
-        lastName: lastName,
         email: email,
         password: password,
       }).then(() => {
@@ -38,7 +36,7 @@ function Login() {
           {/* Password Box */}
           <label for = "password"><b>Password: </b></label>
             <input
-              type = "text"
+              type = "password"
               placeholder = "Enter Password"
               required 
               onChange={(e)=>{
