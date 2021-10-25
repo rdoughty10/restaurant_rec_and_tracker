@@ -9,6 +9,8 @@ import './App.css';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import About from "./components/Pages/About"
 import Home from "./components/Pages/Home"
+import Login from "./components/Login/Login"
+import Signup from "./components/Login/Signup"
 
 function App(){
 
@@ -18,6 +20,8 @@ function App(){
         <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/about" exact component={About} />
+            <Route path="/login" exact component={Login}/>
+            <Route path="/signup" exact component={Signup}/>
         </Switch>
       </Router> 
 

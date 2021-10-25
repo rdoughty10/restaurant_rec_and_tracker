@@ -1,26 +1,6 @@
 import React, {useState} from 'react';
 import Axios from 'axios';
 /*
-  import React, {useState} from "react";
-import From from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import "./Login.css";
-
-export default function Login() {
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-
-    function validateForm() {
-        return firstName.length > 0 && lastName.length > 0 && email.length > 0 && password.length > 0;
-    }
-
-    function handleSubmit(e) {
-        e.preventDefault();
-    }
-  */
-/*
 page for user login 
 */
 /*
@@ -99,7 +79,15 @@ function Login() {
           <p>Don't already have an account? Sign up today.</p>
           {/* Submit and Cancel Buttons */}
           <div class = "clearfix">
-            <button type= "submit" class= "signupbutton">Sign Up</button>
+            <button 
+              onClick = {(e) => {
+              e.preventDefault();
+              window.location.href='http://localhost:3000/signup';
+            }
+            }
+              type= "button" 
+              class= "signupbutton">
+                Sign Up</button>
           </div>
         </div>
       </div>
