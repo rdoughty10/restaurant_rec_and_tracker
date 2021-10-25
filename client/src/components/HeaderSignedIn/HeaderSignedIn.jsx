@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import { Button } from '../Button';
+import { Button } from '../ButtonOut';
 import { Link } from 'react-router-dom';
-import './Header.css';
+import './HeaderSignedIn.css';
 
 
-const Header = () => {
+const HeaderSignedIn = () => {
     const [more, setType] = useState('');
     const [click, setClick] = useState(false)
     const handleClick = () => setClick(!click);
@@ -48,11 +48,11 @@ const Header = () => {
                     </li>
                     <li className='nav-item'>
                         <Link
-                        to='/sign-in'
+                        to='/'
                         className='nav-links-mobile'
                         onClick={closeMobileMenu}
                         >
-                            Register/Sign-In
+                            Sign Out
                         </Link>
                     </li>
                 </ul>
@@ -62,4 +62,4 @@ const Header = () => {
 }
 
 
-export default Header;
+export default HeaderSignedIn;

@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import Axios from 'axios';
 
+import { Link } from 'react-router-dom'
 import Header from '../Header/Header';
 
 /*
@@ -80,7 +81,9 @@ function Signup() {
 
           <div class = "clearfix">
             <button type = "button" class="cancelbutton">Cancel</button>
-            <button type= "submit" class= "signupbutton" onClick={submitUser}>Sign Up</button>
+            <Link to='/home-signed-in'>
+              <button>Register</button>
+            </Link>
           </div>
         </div>
       </div>

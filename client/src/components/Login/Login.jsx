@@ -48,7 +48,9 @@ function Login() {
 
           {/* Submit and Cancel Buttons */}
           <div class = "clearfix">
-            <button type= "login" class= "signupbutton" onClick={getUser}>Login</button>
+            <Link to='home-signed-in'>
+              <button>Login</button>
+            </Link>
           </div>
 
           <p>Don't already have an account? Sign up today.</p>
