@@ -38,7 +38,7 @@ function Login() {
           {/* Password Box */}
           <label for = "password"><b>Password: </b></label>
             <input
-              type = "text"
+              type = "password"
               placeholder = "Enter Password"
               required 
               onChange={(e)=>{
