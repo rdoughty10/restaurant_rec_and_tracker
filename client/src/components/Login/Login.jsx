@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import Axios from 'axios';
 
 import Header from '../Header/Header';
+import {Link} from 'react-router-dom';
 
 function Login() {
 
@@ -10,14 +11,13 @@ function Login() {
 
     const getUser = () => (
       Axios.post('http://localhost:3001/api/user/get', {
-        firstName: firstName,
-        lastName: lastName,
         email: email,
         password: password,
       }).then(() => {
         alert("user found");
       })
     )
+
 
     return (
       <div className ="login">
@@ -54,7 +54,9 @@ function Login() {
           <p>Don't already have an account? Sign up today.</p>
           {/* Submit and Cancel Buttons */}
           <div class = "clearfix">
-            <button type= "submit" class= "signupbutton">Sign Up</button>
+            <Link to='sign-up'>
+              <button>Register</button>
+            </Link>
           </div>
         </div>
       </div>
