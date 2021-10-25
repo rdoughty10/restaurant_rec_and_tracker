@@ -37,7 +37,7 @@ function Signup() {
         <hr></hr>
         <div className = "signup-form">
           {/* First Name Box */}
-          <label for = "firstName"><b>First Name:</b></label>
+          <label htmlFor = "firstName"><b>First Name:</b></label>
           <input 
             type="text" 
             placeholder = "Enter First Name"
@@ -48,7 +48,7 @@ function Signup() {
             }}
           />
           {/* Last Name Box */}
-          <label for = "lastName"> <b>Last Name:</b> </label>
+          <label htmlFor = "lastName"> <b>Last Name:</b> </label>
             <input 
               type = "text"
               placeholder = "Enter Last Name"
@@ -58,7 +58,7 @@ function Signup() {
               }}
             />
           {/* Email Box */}
-          <label for = "email"><b>Email: </b></label>
+          <label htmlFor = "email"><b>Email: </b></label>
             <input
               type = "text"
               placeholder = "Enter Email"
@@ -68,7 +68,7 @@ function Signup() {
               }}
             />
           {/* Password Box */}
-          <label for = "password"><b>Password: </b></label>
+          <label htmlFor = "password"><b>Password: </b></label>
             <input
               type = "password"
               placeholder = "Enter Password"
@@ -79,10 +79,10 @@ function Signup() {
             />
           <p>You adhere to our Terms and Privacy with the creation of your account.</p>
 
-          <div class = "clearfix">
+          <div className = "clearfix">
             <button type = "button" class="cancelbutton">Cancel</button>
-            <Link to='/home-signed-in'>
-              <button>Register</button>
+            <Link to='/login'>
+              <button onClick={submitUser}>Register</button>
             </Link>
           </div>
         </div>

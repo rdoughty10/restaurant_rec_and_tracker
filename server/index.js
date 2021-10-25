@@ -15,14 +15,21 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.json());
 app.use(cors());
 
-app.get("/api/user/get", (req, res) => {
+app.post("/api/user/get", (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
 
-    const sqlSelect = "SELECT * FROM users WHERE email = (?) AND password = (?);"
+    const sqlSelect = "SELECT * FROM users WHERE email = ? AND password = ?;"
     db.query(sqlSelect, [email, password], (err, result) => {
-        console.log(result);
-        console.log("Welcome User")
+
+        if (err){
+            res.send({err:err});
+        }
+        if (result.length > 0){
+            res.send(result);
+        }else{
+            res.send({message: "No email and password found"});
+        }
     })
 })
 

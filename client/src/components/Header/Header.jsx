@@ -13,7 +13,7 @@ const Header = () => {
     return (
         <nav className='navbar'>
             <Link to='/' className='navbar-logo'>
-                Name
+                FoodRec
             </Link>
             <div className='menu-icon' onClick={handleClick}>
                 <i className={click ? 'fas fa-times' : 'fas fa-bars'} />

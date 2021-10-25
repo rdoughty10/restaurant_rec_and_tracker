@@ -9,14 +9,22 @@ function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const getUser = () => (
+    const[loginStatus, setLoginStatus] = useState("");
+
+    const login = () => (
       Axios.post('http://localhost:3001/api/user/get', {
         email: email,
         password: password,
-      }).then(() => {
-        alert("user found");
+      }).then((response) => {
+        console.log(response);
+        if(response.data.message){
+          setLoginStatus(response.data.message);
+        }else{
+          setLoginStatus(response.data[0].firstName);
+        }
       })
     )
+
 
 
     return (
@@ -26,7 +34,7 @@ function Login() {
         <hr></hr>
         <div className = "login-form">
           {/* Email Box */}
-          <label for = "email"><b>Email: </b></label>
+          <label htmlFor = "email"><b>Email: </b></label>
             <input
               type = "text"
               placeholder = "Enter Email"
@@ -36,7 +44,7 @@ function Login() {
               }}
             />
           {/* Password Box */}
-          <label for = "password"><b>Password: </b></label>
+          <label htmlFor = "password"><b>Password: </b></label>
             <input
               type = "password"
               placeholder = "Enter Password"
@@ -47,20 +55,19 @@ function Login() {
             />
 
           {/* Submit and Cancel Buttons */}
-          <div class = "clearfix">
-            <Link to='home-signed-in'>
-              <button>Login</button>
-            </Link>
+          <div className = "clearfix">
+            <button onClick={login}>Login</button>
           </div>
 
           <p>Don't already have an account? Sign up today.</p>
           {/* Submit and Cancel Buttons */}
-          <div class = "clearfix">
-            <Link to='sign-up'>
+          <div className = "clearfix">
+            <Link to='/sign-up'>
               <button>Register</button>
             </Link>
           </div>
         </div>
+        <h1> {loginStatus} </h1>
       </div>
     );
   }
