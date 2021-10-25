@@ -1,16 +1,21 @@
 import './App.css';
-// import React, {useState, Component} from 'react';
+import React from 'react';
 // import Axios from 'axios';
 // import { CssBaseline, Grid } from '@material-ui/core';
 
 // import Header from './components/Header/Header';
 // import Map from './components/Map/Map';
 
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import About from "./components/Pages/About"
 import Home from "./components/Pages/Home"
+<<<<<<< Updated upstream
 import Login from "./components/Login/Login"
 import Signup from "./components/Login/Signup"
+=======
+import SignUp from "./components/Pages/Sign-Up"
+import Help from "./components/Pages/Help"
+>>>>>>> Stashed changes
 
 function App(){
 
@@ -20,8 +25,13 @@ function App(){
         <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/about" exact component={About} />
+<<<<<<< Updated upstream
             <Route path="/login" exact component={Login}/>
             <Route path="/signup" exact component={Signup}/>
+=======
+            <Route path="/help" exact component={Help} />
+            <Route path="/sign-up" exact component={SignUp} />
+>>>>>>> Stashed changes
         </Switch>
       </Router> 
 

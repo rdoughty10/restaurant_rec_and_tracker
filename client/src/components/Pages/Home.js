@@ -1,5 +1,4 @@
-import React, {useState, Component} from 'react';
-import Axios from 'axios';
+import React from "react";
 import { CssBaseline, Grid } from '@material-ui/core';
 
 import Header from '../Header/Header';
