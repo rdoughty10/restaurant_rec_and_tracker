@@ -1,32 +1,63 @@
 import React, {useState} from 'react';
-import { Autocomplete } from '@react-google-maps/api';
-import { AppBar, Toolbar, Typography, MenuItem, InputLabel, FormControl, Select} from '@material-ui/core';
-import { mergeClasses } from '@material-ui/styles';
-import SearchIcon from '@material-ui/icons/Search';
-
-import useStyles from './styles';
+import { Button } from '../Button';
+import { Link } from 'react-router-dom';
+import './Header.css';
 
 
 const Header = () => {
-    const classes = useStyles();
     const [more, setType] = useState('');
+    const [click, setClick] = useState(false)
+    const handleClick = () => setClick(!click);
+    // const closeMobileMenu = () => setClick(false);
 
     return (
-        <AppBar position="static">
-            <Toolbar className={classes.toolbar}>
-                <Typography variant="h5" className={classes.title}>
-                    Restaurant Recommendation and Tracking System
-                </Typography>
-                <FormControl className={classes.formControl}>
-                <InputLabel>More</InputLabel>
-                <Select value = {more} onChange={(e) => setType(e.target.value)}>
-                    <MenuItem value="login">Login</MenuItem>
-                    <MenuItem value="help">Help</MenuItem>
-                    <MenuItem value="about">About/FAQ</MenuItem>
-                </Select>
-            </FormControl>
-            </Toolbar>
-        </AppBar>
+        <nav className='navbar'>
+            <Link to='/' className='navbar-logo'>
+                Name
+            </Link>
+            <div className='menu-icon' onClick={handleClick}>
+                <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
+            </div>    
+                <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+                    <li className='nav-item'>
+                        <Link
+                        to='/'
+                        className='nav-links'
+                        // onClick={closeMobileMenu}
+                        >
+                            Home
+                        </Link>
+                    </li>
+                    <li className='nav-item'>
+                        <Link
+                        to='/about'
+                        className='nav-links'
+                        // onClick={closeMobileMenu}
+                        >
+                            About Us <i className='fas fa-caret-down' />
+                        </Link>
+                    </li>
+                    <li className='nav-item'>
+                        <Link
+                        to='/help'
+                        className='nav-links'
+                        // onClick={closeMobileMenu}
+                        >
+                            Help/FAQ
+                        </Link>
+                    </li>
+                    <li className='nav-item'>
+                        <Link
+                        to='/sign-up'
+                        className='nav-links-mobile'
+                        // onClick={closeMobileMenu}
+                        >
+                            Register/Sign-In
+                        </Link>
+                    </li>
+                </ul>
+                <Button />
+        </nav>
     );
 }
 
