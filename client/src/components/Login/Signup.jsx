@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import Axios from 'axios';
+
 /*
 page for user account creation 
 */
@@ -7,7 +8,6 @@ page for user account creation
 function for class 
 */
 function Signup() {
-
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -71,7 +71,7 @@ function Signup() {
                 setPassword(e.target.value)
               }}
             />
-          <p>You adhere to our and Privacy with the creation of your account.</p>
+          <p>You adhere to our Terms and Privacy with the creation of your account.</p>
 
           <div class = "clearfix">
             <button type = "button" class="cancelbutton">Cancel</button>
