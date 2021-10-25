@@ -43,6 +43,7 @@ app.post('/api/user/new', (req, res) => {
     const sqlInsert = "INSERT INTO users (firstName, lastName, email, password) VALUES (?,?,?,?);"
     db.query(sqlInsert, [firstName, lastName, email, password], (err, result) => {
         console.log(result);
+        
     })
 })
 

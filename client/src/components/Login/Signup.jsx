@@ -3,6 +3,7 @@ import Axios from 'axios';
 
 import { Link } from 'react-router-dom'
 import Header from '../Header/Header';
+import { CssBaseline, Grid } from '@material-ui/core';
 
 /*
 page for user account creation 
@@ -18,19 +19,22 @@ function Signup() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const submitUser = () => (
+    const[registrationStatus, setRegistrationStatus] = useState("");
+
+    const register = () => (
       Axios.post('http://localhost:3001/api/user/new', {
         firstName: firstName,
         lastName: lastName,
         email: email,
         password: password,
-      }).then(() => {
-        alert("successful registration");
+      }).then((result) => {
+        console.log(result);
       })
     )
 
     return (
-      <div className ="signup">
+      <>
+        <CssBaseline/>
         <Header/>
         <h1> Sign Up </h1>
         <p>Enter your your information to create an account.</p>
@@ -81,12 +85,12 @@ function Signup() {
 
           <div className = "clearfix">
             <button type = "button" class="cancelbutton">Cancel</button>
-            <Link to='/login'>
-              <button onClick={submitUser}>Register</button>
-            </Link>
+              <Link to='/login'>
+                <button onClick={register}>Register</button>
+              </Link>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 

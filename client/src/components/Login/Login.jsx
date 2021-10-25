@@ -3,6 +3,8 @@ import Axios from 'axios';
 
 import Header from '../Header/Header';
 import {Link} from 'react-router-dom';
+import { CssBaseline, Grid } from '@material-ui/core';
+
 
 function Login() {
 
@@ -28,7 +30,8 @@ function Login() {
 
 
     return (
-      <div className ="login">
+      <>
+        <CssBaseline/>
         <Header/>
         <h1> Login </h1>
         <hr></hr>
@@ -68,7 +71,7 @@ function Login() {
           </div>
         </div>
         <h1> {loginStatus} </h1>
-      </div>
+      </>
     );
   }
 
