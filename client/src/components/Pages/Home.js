@@ -5,6 +5,7 @@ import { getRestaurantData } from '../../api';
 import Header from '../Header/Header';
 import Map from '../Map/Map';
 import List from '../List/List';
+import Search from '../Search/Search'
 
 const Home = () => {
 
@@ -36,7 +37,8 @@ const Home = () => {
       <CssBaseline />
       <Header />
       <Grid container spacing={3} style={{width: '100%'}}>
-        <Grid item xs={12} md={4}>
+      <Grid item xs={12} md={4}>
+          <Search />
           <List restaurants={restaurants}
                 childClicked={childClicked}
                 isLoading={isLoading}
@@ -51,8 +53,11 @@ const Home = () => {
             setChildClicked={setChildClicked}
           />
         </Grid>
+        
+        
       </Grid>
     </>
+  
   );
 }
 
