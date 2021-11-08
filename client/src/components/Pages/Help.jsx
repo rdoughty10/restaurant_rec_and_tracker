@@ -8,14 +8,25 @@ function Help() {
     return (
         <> 
             <Header />
-            <div class="about-section">
+            <div class="help-section">
                 <h1>Help/FAQ Page</h1>
                 <p>Some text.</p>
             </div>
   
+            <h2>Help</h2>
+            <div class="row">
+                <div class="column-help">
+                    <div class="card">
+                        <div class="container">
+                            <p>Helpful Text</p>
+                        </div>
+                    </div>
+                </div>
+            </div>   
+
             <h2>Frequently Asked Questions</h2>
             <div class="row">
-                <div class="column">
+                <div class="column-help">
                     <div class="card">
                         <div class="container">
                             <h3>Question 1</h3>
@@ -24,7 +35,7 @@ function Help() {
                     </div>
                 </div>
   
-                <div class="column">
+                <div class="column-help">
                     <div class="card">
                         <div class="container">
                             <h3>Question 2</h3>
@@ -33,7 +44,7 @@ function Help() {
                     </div>
                  </div>
   
-                <div class="column">
+                <div class="column-help">
                     <div class="card">
                         <div class="container">
                             <h3>Question 3</h3>

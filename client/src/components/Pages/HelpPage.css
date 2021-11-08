@@ -11,7 +11,7 @@ body {
     box-sizing: inherit;
   }
   
-  .column {
+  .column-help {
     float: left;
     width: 100%;
     margin-bottom: 16px;
@@ -23,7 +23,7 @@ body {
     margin: 8px;
   }
   
-  .about-section {
+  .help-section {
     padding: 50px;
     text-align: center;
     background-color: #474e5d;

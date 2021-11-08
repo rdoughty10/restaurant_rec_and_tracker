@@ -18,7 +18,7 @@ function About() {
                     <div class="card">
                         <div class="container">
                             <h3>Ryan Doughty</h3>
-                            <p class="title">Daddy</p>
+                            <p class="title">Title</p>
                             <p>Some text that describes me.</p>
                             <p>ryan.doughty@case.edu</p>
                             <p><button class="button">Contact</button></p>
@@ -29,8 +29,8 @@ function About() {
                 <div class="column">
                     <div class="card">
                         <div class="container">
-                            <h3>Jackson Kaleen</h3>
-                            <p class="title">Depressed Usually</p>
+                            <h3>Jackson Kallen</h3>
+                            <p class="title">Title</p>
                             <p>Some text that describes me.</p>
                             <p>jackson.kallen@case.edu</p>
                             <p><button class="button">Contact</button></p>
@@ -42,7 +42,7 @@ function About() {
                     <div class="card">
                         <div class="container">
                             <h3>Matthew Vatne</h3>
-                            <p class="title">Thinks He's Funny</p>
+                            <p class="title">Title</p>
                             <p>Some text that describes me.</p>
                             <p>matthew.vatne@case.edu</p>
                             <p><button class="button">Contact</button></p>
