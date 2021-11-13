@@ -14,7 +14,7 @@ const PlaceDetails = ({restaurant, selected, refProp}) => {
     return (
         <Card elevation={6}>
             <CardMedia
-                style={{height: 100}}
+                style={{height: 0}}
                 title={restaurant.name}
             />
             <CardContent>

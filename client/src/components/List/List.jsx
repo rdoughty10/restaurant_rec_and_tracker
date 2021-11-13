@@ -45,7 +45,7 @@ const List = ({restaurants, childClicked, isLoading}) => {
             
                 <Grid container spacing ={2} className={classes.list}>
                     {restaurants?.map((restaurant, i) => (
-                        <Grid item key = {i} xs={12}>
+                        <Grid item key = {i} xs={12} md={4}>
                             <PlaceDetails 
                                 restaurant={restaurant}
                                 selected={Number(childClicked) == i}
