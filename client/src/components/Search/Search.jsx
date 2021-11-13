@@ -2,6 +2,7 @@ import React, {useState, useEffect, createRef} from 'react';
 import {CircularProgress, Grid, Typography, InputLabel, MenuItem, FormControl, Select} from '@material-ui/core';
 import useStyles from './styles'
 import PlaceDetails from '../PlaceDetails/PlaceDetails';
+import { Button } from './ButtonSearch';
 
 
 const Search = ({restaurants, childClicked, isLoading}) => {
@@ -39,7 +40,7 @@ const Search = ({restaurants, childClicked, isLoading}) => {
                         <MenuItem value="anyDistance">25+</MenuItem>
                     </Select>
                 </FormControl>
-                <button>Random Search</button>
+                <Button />
 
                 <Typography variant="h4">Targeted Search</Typography>
                 <FormControl className={classes.formControl}>
@@ -61,7 +62,7 @@ const Search = ({restaurants, childClicked, isLoading}) => {
                         <MenuItem value="expensive">Expensive $$$</MenuItem>
                     </Select>
                 </FormControl>
-                <button>Targeted Search</button>
+                <Button />
                 
                 <Typography variant="h5">Result</Typography>
 
