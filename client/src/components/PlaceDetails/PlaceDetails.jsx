@@ -41,13 +41,10 @@ const PlaceDetails = ({restaurant, selected, refProp}) => {
                     </Typography>
                 )}
                 <CardActions>
-                    <Button size="small" color="primary"> 
-                        <Link
-                            to='/review'
-                        >
-                         Leave a Review   
+                    <Button size="small" color="primary">
+                        <Link to= '/review' aboutProps={ restaurant }>
+                        Leave a Review
                         </Link>
-                        
                     </Button>
                     <Button size="small" color="primary" onClick={() => window.open(restaurant.website, '_blank')}>
                         Website

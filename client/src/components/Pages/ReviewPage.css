@@ -1,0 +1,15 @@
+.Review {
+    display: flex;
+    justify-content: baseline;
+    align-items: center;
+    min-height: 25vh;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+.star {
+    cursor: pointer;
+    transition: color 200ms;
+}
