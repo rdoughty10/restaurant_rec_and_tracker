@@ -20,6 +20,10 @@ const PlaceDetails = ({restaurant, selected, refProp}) => {
             <CardContent>
                 <Typography gutterBottom variant='h5'>{restaurant.name}</Typography>
                 <Box display='flex' justifyContent='space-between'>
+                    <Rating size="small" value={Number(restaurant.rating)}>Price</Rating>
+                    <Typography gutterBottom variant='subtitle1'>out of {restaurant.num_reviews}</Typography>
+                </Box>
+                <Box display='flex' justifyContent='space-between'>
                     <Typography variant='subtitle1'>Price</Typography>
                     <Typography gutterBottom variant='subtitle1'>{restaurant.price_level}</Typography>
                 </Box>
@@ -42,9 +46,7 @@ const PlaceDetails = ({restaurant, selected, refProp}) => {
                 )}
                 <CardActions>
                     <Button size="small" color="primary"> 
-                        <Link
-                            to='/review'
-                        >
+                        <Link to='/review' aboutProps={restaurant}>
                          Leave a Review   
                         </Link>
                         
