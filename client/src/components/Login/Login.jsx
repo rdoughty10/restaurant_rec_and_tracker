@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Axios from 'axios';
 
 import Header from '../Header/Header';
@@ -13,12 +13,14 @@ function Login() {
 
     const[loginStatus, setLoginStatus] = useState("");
 
+    Axios.defaults.withCredentials = true;
+
     const login = () => (
       Axios.post('http://localhost:3001/api/user/get', {
         email: email,
         password: password,
       }).then((response) => {
-        console.log(response);
+        // console.log(response);
         if(response.data.message){
           setLoginStatus(response.data.message);
         }else{
@@ -27,6 +29,16 @@ function Login() {
       })
     )
 
+      
+    useEffect(() => {
+      Axios.get('http://localhost:3001/api/user/get').then((response) => {
+        console.log(response)
+        if (response.data.loggedIn == true){
+          console.log("Already logged in")
+          setLoginStatus(response.data.user[0].firstName)
+        }
+      });
+    }, [])
 
 
     return (

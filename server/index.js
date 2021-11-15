@@ -30,7 +30,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie:{
-        expires: 60*60*24,
+        expires: 60*60*24*1000,
     }
 }))
 
@@ -58,6 +58,14 @@ app.post("/api/user/get", (req, res) => {
             res.send({message: "No user with this email"});
         }
     })
+})
+
+app.get('/api/user/get', (req, res) => {
+    if (req.session.user){
+        res.send({loggedIn: true, user: req.session.user})
+    }else{
+        res.send({loggedIn: false})
+    }
 })
 
 app.post('/api/user/new', (req, res) => {
