@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors')
 const app = express();
 const mysql = require("mysql");
+const bcrypt = require("bcrypt")
+const saltRounds = 10;
 
 const db = mysql.createPool({
     host: "localhost", 
@@ -19,16 +21,22 @@ app.post("/api/user/get", (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
 
-    const sqlSelect = "SELECT * FROM users WHERE email = ? AND password = ?;"
-    db.query(sqlSelect, [email, password], (err, result) => {
+    const sqlSelect = "SELECT * FROM users WHERE email = ?;"
+    db.query(sqlSelect, email, (err, result) => {
 
         if (err){
             res.send({err:err});
         }
         if (result.length > 0){
-            res.send(result);
+            bcrypt.compare(password, result[0].password, (error, response) => {
+                if (response){
+                    res.send(result)
+                } else{
+                    res.send({message: "Wrong email/password combination"})
+                }
+            })
         }else{
-            res.send({message: "No email and password found"});
+            res.send({message: "No user with this email"});
         }
     })
 })
@@ -40,11 +48,16 @@ app.post('/api/user/new', (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
 
-    const sqlInsert = "INSERT INTO users (firstName, lastName, email, password) VALUES (?,?,?,?);"
-    db.query(sqlInsert, [firstName, lastName, email, password], (err, result) => {
-        console.log(result);
-        
+    bcrypt.hash(password, saltRounds, (err, hash) =>{
+        if (err){
+            console.log(err)
+        }
+        const sqlInsert = "INSERT INTO users (firstName, lastName, email, password) VALUES (?,?,?,?);"
+        db.query(sqlInsert, [firstName, lastName, email, hash], (err, result) => {
+            console.log(result);
+        })
     })
+    
 })
 
 app.listen(3001, () => {

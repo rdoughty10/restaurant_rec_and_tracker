@@ -36,6 +36,7 @@ function Login() {
         <h1> Login </h1>
         <hr></hr>
         <div className = "login-form">
+          <h5> {loginStatus} </h5>
           {/* Email Box */}
           <label htmlFor = "email"><b>Email: </b></label>
             <input
@@ -70,7 +71,7 @@ function Login() {
             </Link>
           </div>
         </div>
-        <h1> {loginStatus} </h1>
+        
       </>
     );
   }
