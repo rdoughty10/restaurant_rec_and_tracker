@@ -5,6 +5,8 @@ const app = express();
 const mysql = require("mysql");
 const bcrypt = require("bcrypt")
 const saltRounds = 10;
+const cookieParser = require("cookie-parser")
+const session = require("express-session")
 
 const db = mysql.createPool({
     host: "localhost", 
@@ -15,7 +17,22 @@ const db = mysql.createPool({
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: ["http://localhost:3000", "http://localhost:3000/login", "http://localhost:3000/sign-in"],
+    methods: ["GET", "POST"],
+    credentials: true,
+}));
+
+app.use(cookieParser())
+app.use(session({
+    key: "userId",
+    secret: "soup",
+    resave: false,
+    saveUninitialized: false,
+    cookie:{
+        expires: 60*60*24,
+    }
+}))
 
 app.post("/api/user/get", (req, res) => {
     const email = req.body.email;
@@ -30,6 +47,8 @@ app.post("/api/user/get", (req, res) => {
         if (result.length > 0){
             bcrypt.compare(password, result[0].password, (error, response) => {
                 if (response){
+                    req.session.user = result
+                    console.log(req.session.user)
                     res.send(result)
                 } else{
                     res.send({message: "Wrong email/password combination"})
