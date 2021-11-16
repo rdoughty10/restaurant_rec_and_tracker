@@ -11,7 +11,8 @@ function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const[loginStatus, setLoginStatus] = useState("");
+    const [currentUser, setCurrentUser] = useState("");
+    const [loginStatus, setLoginStatus] = useState(false);
 
     Axios.defaults.withCredentials = true;
 
@@ -22,9 +23,11 @@ function Login() {
       }).then((response) => {
         // console.log(response);
         if(response.data.message){
-          setLoginStatus(response.data.message);
+          setCurrentUser(response.data.message);
+          setLoginStatus(false)
         }else{
-          setLoginStatus(response.data[0].firstName);
+          setCurrentUser(response.data[0].firstName);
+          setLoginStatus(true)
         }
       })
     )
@@ -35,7 +38,7 @@ function Login() {
         console.log(response)
         if (response.data.loggedIn == true){
           console.log("Already logged in")
-          setLoginStatus(response.data.user[0].firstName)
+          setCurrentUser(response.data.user[0].firstName)
         }
       });
     }, [])
@@ -48,7 +51,7 @@ function Login() {
         <h1> Login </h1>
         <hr></hr>
         <div className = "login-form">
-          <h5> {loginStatus} </h5>
+          <h5> {currentUser} </h5>
           {/* Email Box */}
           <label htmlFor = "email"><b>Email: </b></label>
             <input

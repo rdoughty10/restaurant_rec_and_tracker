@@ -1,5 +1,6 @@
 import React, { useState, useEffect }  from 'react';
 import { CssBaseline, Grid } from '@material-ui/core';
+import Axios from 'axios';
 
 import { getRestaurantData } from '../../api';
 import Header from '../Header/Header';
@@ -15,11 +16,15 @@ const Home = () => {
   const [childClicked, setChildClicked] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
+  const [user, setUser] = useState({});
+  const [loggedIn, setLoggedIn] = useState(false)
+
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(({coords: {latitude, longitude}}) => {
       setCoordinates({lat: latitude, lng: longitude});
     })
   }, []);
+
 
   useEffect(() => {
     setIsLoading(true);
@@ -32,11 +37,28 @@ const Home = () => {
     })
   }, [coordinates, bounds]);
 
+
+  useEffect(() => {
+    Axios.get('http://localhost:3001/api/user/get').then((response) => {
+      console.log(response)
+      if (response.data.loggedIn == true){
+        setUser(response.data.user[0])
+        setLoggedIn(true)
+      }else{
+        setUser({})
+        setLoggedIn(false)
+      }
+    });
+  }, [])
+
   return (
     <>
       <CssBaseline />
       <Header />
       <Grid container spacing={3} style={{width: '100%'}}>
+        <Grid item xs={12} md={12}>
+          {/* <h1> {user.firstName}'s Restaurants </h1> */}
+        </Grid>
         <Grid item xs={12} md={4}>
           <Search />
         </Grid>

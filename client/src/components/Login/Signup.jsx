@@ -19,8 +19,6 @@ function Signup() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const[registrationStatus, setRegistrationStatus] = useState("");
-
     const register = () => (
       Axios.post('http://localhost:3001/api/user/new', {
         firstName: firstName,
@@ -84,10 +82,12 @@ function Signup() {
           <p>You adhere to our Terms and Privacy with the creation of your account.</p>
 
           <div className = "clearfix">
-            <button type = "button" class="cancelbutton">Cancel</button>
-              <Link to='/login'>
-                <button onClick={register}>Register</button>
-              </Link>
+            <Link to="/login">
+              <button type = "button" class="cancelbutton">Already have an account?</button>
+            </Link>
+            <Link to='/login'>
+              <button onClick={register}>Register</button>
+            </Link>
           </div>
         </div>
       </>
