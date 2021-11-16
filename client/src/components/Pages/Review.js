@@ -6,7 +6,7 @@ import Header from '../Header/Header';
 import StarRating from '../StarRating';
 import './ReviewPage.css'
 
-const Review = ({restaurant}) => {
+const Review = () => {
     return (
         <>
             <CssBaseline />
@@ -16,18 +16,10 @@ const Review = ({restaurant}) => {
                 {/* {restaurant.name} */}
             </Typography>
             <Grid container spacing={3} style={{width: '100%'}}>
-                <Grid item xs={12} md={7}>
-                    <Typography variant="h6">
-                        Out of 5 Stars
-                    </Typography>
+                <Grid item xs={12} md={12}>
                     <div className="Review">
                         <StarRating />
                     </div>
-                </Grid>
-                <Grid item xs={12} md={5}>
-                    <Typography variant="h6">
-                        Feedback
-                    </Typography>
                 </Grid>
             </Grid>
         </>

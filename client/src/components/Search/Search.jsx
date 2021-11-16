@@ -12,12 +12,28 @@ const Search = ({restaurants, childClicked, isLoading}) => {
     const [distance, setDistance] = useState('');
     const [price, setPrice] = useState('');
     const [elRefs, setElRefs]= useState([]);
+    const [result, setResult] = useState('')
+
 
     useEffect(() => {
         const refs = Array(restaurants?.length).fill().map((_ , i) => elRefs[i] || createRef());
 
         setElRefs(refs);
     }, [restaurants])
+
+    function getRandomNumber(min, max) {
+        let a = max - min + 1;
+        let b = Math.random() * a;
+        let result = Math.floor(b) + min;
+        return result;
+    }
+
+
+    function random(restaurants) {
+        console.log("hi")
+        let index = getRandomNumber(0, restaurants?.length)
+        setResult(restaurants[index])
+    }
 
     return (
         <div className={classes.container}>
@@ -40,7 +56,8 @@ const Search = ({restaurants, childClicked, isLoading}) => {
                         <MenuItem value="anyDistance">25+</MenuItem>
                     </Select>
                 </FormControl>
-                <Button />
+                <button onClick={() => random(restaurants)}>Search</button>
+
 
                 <Typography variant="h4">Targeted Search</Typography>
                 <FormControl className={classes.formControl}>
@@ -62,9 +79,12 @@ const Search = ({restaurants, childClicked, isLoading}) => {
                         <MenuItem value="expensive">Expensive $$$</MenuItem>
                     </Select>
                 </FormControl>
-                <Button />
-                
-                <Typography variant="h5">Result</Typography>
+                {/* <Button /> */}
+
+                {/* <Typography variant="h5">Result</Typography> */}
+                <PlaceDetails
+                            restaurant={result}
+                />
 
                 {/*display result*/}
                 <Grid container spacing={2} className={classes.Search}>

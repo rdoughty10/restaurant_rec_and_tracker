@@ -14,7 +14,7 @@ const PlaceDetails = ({restaurant, selected, refProp}) => {
     return (
         <Card elevation={6}>
             <CardMedia
-                style={{height: 0}}
+                style={{height: 100}}
                 title={restaurant.name}
             />
             <CardContent>
@@ -46,7 +46,7 @@ const PlaceDetails = ({restaurant, selected, refProp}) => {
                 )}
                 <CardActions>
                     <Button size="small" color="primary">
-                        <Link to= '/review' aboutProps={ restaurant }>
+                        <Link to= '/review'>
                         Leave a Review
                         </Link>
                     </Button>

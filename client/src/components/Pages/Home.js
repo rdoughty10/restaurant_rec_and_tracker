@@ -54,7 +54,9 @@ const Home = () => {
         </Grid>
         
         <Grid item xs={12} md={12}>
-          <Search />
+          <Search 
+          restaurants={restaurants}
+          />
         </Grid>
         
       </Grid>
