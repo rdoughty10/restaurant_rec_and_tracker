@@ -1,9 +1,9 @@
 import React from 'react';
-import {Rating} from '@material-ui/lab';
+//import {Rating} from '@material-ui/lab';
 import {Box, Typography, Button, Card, CardMedia, CardContent, CardActions, Chip} from '@material-ui/core';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import PhoneIcon from '@material-ui/icons/Phone';
-//import Rating from '@material-ui/lab/Rating';
+import Rating from '@material-ui/lab/Rating';
 import useStyles from './styles';
 import { Link } from 'react-router-dom'
 
@@ -14,11 +14,15 @@ const PlaceDetails = ({restaurant, selected, refProp}) => {
     return (
         <Card elevation={6}>
             <CardMedia
-                style={{height: 0}}
+                style={{height: 100}}
                 title={restaurant.name}
             />
             <CardContent>
                 <Typography gutterBottom variant='h5'>{restaurant.name}</Typography>
+                <Box display='flex' justifyContent='space-between'>
+                    <Rating value={Number(restaurant.rating)} readOnly/>
+                    <Typography gutterBottom variant='subtitle1'>out of {restaurant.num_reviews}</Typography>
+                </Box>
                 <Box display='flex' justifyContent='space-between'>
                     <Typography variant='subtitle1'>Price</Typography>
                     <Typography gutterBottom variant='subtitle1'>{restaurant.price_level}</Typography>
@@ -41,13 +45,10 @@ const PlaceDetails = ({restaurant, selected, refProp}) => {
                     </Typography>
                 )}
                 <CardActions>
-                    <Button size="small" color="primary"> 
-                        <Link
-                            to='/review'
-                        >
-                         Leave a Review   
+                    <Button size="small" color="primary">
+                        <Link to= '/review'>
+                        Leave a Review
                         </Link>
-                        
                     </Button>
                     <Button size="small" color="primary" onClick={() => window.open(restaurant.website, '_blank')}>
                         Website

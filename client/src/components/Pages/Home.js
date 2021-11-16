@@ -56,13 +56,13 @@ const Home = () => {
       <CssBaseline />
       <Header />
       <Grid container spacing={3} style={{width: '100%'}}>
-        <Grid item xs={12} md={12}>
-          {/* <h1> {user.firstName}'s Restaurants </h1> */}
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <Search />
-        </Grid>
-        <Grid item xs={12} md={8}>
+      <Grid item xs={12} md={4}>
+          <List restaurants={restaurants}
+                childClicked={childClicked}
+                isLoading={isLoading}
+          />
+        </Grid>  
+       <Grid item xs={12} md={8}>
           <Map 
             setCoordinates = {setCoordinates}
             setBounds = {setBounds}
@@ -71,12 +71,12 @@ const Home = () => {
             setChildClicked={setChildClicked}
           />
         </Grid>
+        
         <Grid item xs={12} md={12}>
-          <List restaurants={restaurants}
-                childClicked={childClicked}
-                isLoading={isLoading}
+          <Search 
+          restaurants={restaurants}
           />
-        </Grid>  
+        </Grid>
         
       </Grid>
     </>
