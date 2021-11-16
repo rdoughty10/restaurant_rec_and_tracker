@@ -60,6 +60,13 @@ app.post("/api/user/get", (req, res) => {
     })
 })
 
+app.get("/api/user/logout", (req, res) => {
+    if (req.session.user){
+        req.session.destroy()
+        res.send({loggedIn: false})
+    }
+})
+
 app.get('/api/user/get', (req, res) => {
     if (req.session.user){
         res.send({loggedIn: true, user: req.session.user})
