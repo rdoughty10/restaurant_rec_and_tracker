@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Axios from 'axios';
 
 import Header from '../Header/Header';
@@ -11,68 +11,145 @@ function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const[loginStatus, setLoginStatus] = useState("");
+    const [currentUser, setCurrentUser] = useState("");
+    const [loginStatus, setLoginStatus] = useState(false);
+
+    Axios.defaults.withCredentials = true;
 
     const login = () => (
       Axios.post('http://localhost:3001/api/user/get', {
         email: email,
         password: password,
       }).then((response) => {
-        console.log(response);
+        // console.log(response);
         if(response.data.message){
-          setLoginStatus(response.data.message);
+          setCurrentUser(response.data.message);
+          setLoginStatus(false)
         }else{
-          setLoginStatus(response.data[0].firstName);
+          setCurrentUser(response.data[0].firstName);
+          setLoginStatus(true)
         }
       })
     )
 
+    const logout = () => (
+      Axios.get('http://localhost:3001/api/user/logout', {}).then(
+        (response) => {
+          console.log(response)
+          if (!response.data.loggedIn){
+            setLoginStatus(false)
+            setCurrentUser("")
+          }
+        }
+      )
+    )
+
+      
+    useEffect(() => {
+      Axios.get('http://localhost:3001/api/user/get').then((response) => {
+        console.log(response)
+        if (response.data.loggedIn == true){
+          setCurrentUser(response.data.user[0].firstName)
+          setLoginStatus(true)
+        }
+      });
+    }, [])
 
 
-    return (
-      <>
-        <CssBaseline/>
-        <Header/>
-        <h1> Login </h1>
-        <hr></hr>
-        <div className = "login-form">
-          {/* Email Box */}
-          <label htmlFor = "email"><b>Email: </b></label>
-            <input
-              type = "text"
-              placeholder = "Enter Email"
-              required
-              onChange={(e)=>{
-                setEmail(e.target.value)
-              }}
-            />
-          {/* Password Box */}
-          <label htmlFor = "password"><b>Password: </b></label>
-            <input
-              type = "password"
-              placeholder = "Enter Password"
-              required 
-              onChange={(e)=>{
-                setPassword(e.target.value)
-              }}
-            />
-
-          {/* Submit and Cancel Buttons */}
-          <div className = "clearfix">
-            <button onClick={login}>Login</button>
+    if (loginStatus){
+      return (
+        <>
+          <CssBaseline/>
+          <Header/>
+          <h1> Login </h1>
+          <hr></hr>
+          <div className = "login-form">
+            <h5> {currentUser} </h5>
+            {/* Email Box */}
+            <label htmlFor = "email"><b>Email: </b></label>
+              <input
+                type = "text"
+                placeholder = "Enter Email"
+                required
+                onChange={(e)=>{
+                  setEmail(e.target.value)
+                }}
+              />
+            {/* Password Box */}
+            <label htmlFor = "password"><b>Password: </b></label>
+              <input
+                type = "password"
+                placeholder = "Enter Password"
+                required 
+                onChange={(e)=>{
+                  setPassword(e.target.value)
+                }}
+              />
+  
+            {/* Submit and Cancel Buttons */}
+            <div className = "clearfix">
+              <button onClick={logout}>Logout</button>
+            </div>
+  
+            <p>Don't already have an account? Sign up today.</p>
+            {/* Submit and Cancel Buttons */}
+            <div className = "clearfix">
+              <Link to='/sign-up'>
+                <button>Register</button>
+              </Link>
+            </div>
           </div>
-
-          <p>Don't already have an account? Sign up today.</p>
-          {/* Submit and Cancel Buttons */}
-          <div className = "clearfix">
-            <Link to='/sign-up'>
-              <button>Register</button>
-            </Link>
+          
+        </>
+      );
+    }else{
+      return (
+        <>
+          <CssBaseline/>
+          <Header/>
+          <h1> Login </h1>
+          <hr></hr>
+          <div className = "login-form">
+            <h5> {currentUser} </h5>
+            {/* Email Box */}
+            <label htmlFor = "email"><b>Email: </b></label>
+              <input
+                type = "text"
+                placeholder = "Enter Email"
+                required
+                onChange={(e)=>{
+                  setEmail(e.target.value)
+                }}
+              />
+            {/* Password Box */}
+            <label htmlFor = "password"><b>Password: </b></label>
+              <input
+                type = "password"
+                placeholder = "Enter Password"
+                required 
+                onChange={(e)=>{
+                  setPassword(e.target.value)
+                }}
+              />
+  
+            {/* Submit and Cancel Buttons */}
+            <div className = "clearfix">
+              <button onClick={login}>Login</button>
+            </div>
+  
+            <p>Don't already have an account? Sign up today.</p>
+            {/* Submit and Cancel Buttons */}
+            <div className = "clearfix">
+              <Link to='/sign-up'>
+                <button>Register</button>
+              </Link>
+            </div>
           </div>
-        </div>
-        <h1> {loginStatus} </h1>
-      </>
-    );
+          
+        </>
+      );
+    }
+    
   }
 
 
