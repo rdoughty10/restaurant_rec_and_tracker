@@ -7,3 +7,13 @@ configure({adapter: new Adapter()});
 it("renders without crashing", () => {
     shallow(<Login />);
 });
+
+it("renders logged in wo crashing", () => {
+    const mockCallBack = jest.fn();
+
+    const login = shallow((<Login/>));
+    const button = login.findWhere(node => {
+        return node.type() === 'button' && node.text() === "Login";
+    });
+    button.props().onClick();
+});
