@@ -7,6 +7,7 @@ import Header from '../Header/Header';
 import Map from '../Map/Map';
 import List from '../List/List';
 import Search from '../Search/Search'
+import 'regenerator-runtime/runtime'
 
 const Home = () => {
 
