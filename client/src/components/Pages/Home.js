@@ -33,6 +33,12 @@ const Home = () => {
     console.log(coordinates, bounds);
     getRestaurantData(bounds.sw, bounds.ne).then((data) => {
       console.log(data);
+      for (var i = 0; i < data.length; i++) {
+        if (!data[i].name){
+          data.splice(i, 1);
+        }
+      }
+      console.log(data)
       setRestaurants(data);
       setIsLoading(false);
     })
