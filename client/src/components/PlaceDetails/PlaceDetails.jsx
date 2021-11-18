@@ -5,7 +5,7 @@ import LocationOnIcon from '@material-ui/icons/LocationOn';
 import PhoneIcon from '@material-ui/icons/Phone';
 import Rating from '@material-ui/lab/Rating';
 import useStyles from './styles';
-import { Link } from 'react-router-dom'
+import { Link, Router } from 'react-router-dom'
 
 
 const PlaceDetails = ({restaurant, selected, refProp}) => {
@@ -46,9 +46,11 @@ const PlaceDetails = ({restaurant, selected, refProp}) => {
                 )}
                 <CardActions>
                     <Button size="small" color="primary">
+                    
                         <Link to= '/review'>
                         Leave a Review
                         </Link>
+                        
                     </Button>
                     <Button size="small" color="primary" onClick={() => window.open(restaurant.website, '_blank')}>
                         Website

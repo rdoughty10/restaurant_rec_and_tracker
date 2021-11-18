@@ -1,11 +1,14 @@
 import Search from '../src/components/Search/Search';
 import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
-import { shallow, configure } from 'enzyme';
-configure({adapter: new Adapter()});
+import {CircularProgress, Grid, Typography, InputLabel, MenuItem, FormControl, Select, ExpansionPanelActions} from '@material-ui/core';
+import {configure, shallow, mount} from 'enzyme';
+import { Link, Router } from 'react-router-dom'
+
+configure({ adapter: new Adapter() })
 
 it("renders without crashing", () => {
-    shallow(<Search />);
+    shallow(<Search />)
 });
 
 const restaurants = [
@@ -30,10 +33,38 @@ const restaurants = [
     },
 ]
 
-it("accepts restaurant [props without crashing", () => {
+
+it("accepts restaurant without crashing", () => {
     shallow(<Search restaurants = {restaurants}/>);
 });
 
 it("accepts restaurants and isLoading without crashing", () => {
     shallow(<Search restaurants = {restaurants} isLoading = {true}/>);
 });
+
+it("accounts for typography", () => {
+    const wrapper = mount(<Typography variant={"h4"}/>);
+    const value = wrapper.find("Typography").prop().variant;
+    expect(value).toEqual("h4")
+});
+
+// describe('react unit tests', () => {
+
+//     describe('full DOM tests', () => {
+        // let reactWrapper: ReactWrapper;
+        //     beforeEach(() => {
+        //         reactWrapper = mount(<Search />);
+        //     });
+
+
+            // it('Child React Component html content would be rendered', () => {
+            //     const reactWrapper = mount(<Search restaurants = {restaurants}/>);
+            //     expect(reactWrapper.find(Typography).length).toBe(1);
+            //     expect(reactWrapper.find(FormControl).length).toBe(2);
+            //     expect(reactWrapper.find(InputLabel).length).toBe(3);
+            //     expect(reactWrapper.find(Select).length).toBe(3);
+            //     expect(reactWrapper.find(MenuItem).length).toBe(14);
+            //     expect(reactWrapper.find(PlaceDetails).length).toBe(14);
+            //     expect(reactWrapper.find(Grid).length).toBe(1);
+            //    });
+        

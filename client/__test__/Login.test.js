@@ -17,3 +17,4 @@ it("renders logged in wo crashing", () => {
     });
     button.props().onClick();
 });
+

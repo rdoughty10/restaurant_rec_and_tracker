@@ -6,5 +6,5 @@ import { ExpansionPanelActions } from '@material-ui/core';
 configure({adapter: new Adapter()});
 
 it("renders without crashing", () => {
-    const home = shallow(<Home />);
+    shallow(<Home />);
 });

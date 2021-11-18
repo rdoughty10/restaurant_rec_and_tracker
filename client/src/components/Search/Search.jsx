@@ -12,6 +12,7 @@ const Search = ({restaurants, childClicked, isLoading}) => {
     const [price, setPrice] = useState('');
     const [elRefs, setElRefs]= useState([]);
     const [result, setResult] = useState('')
+    const [found, setFound] = useState('')
 
 
     useEffect(() => {
@@ -28,10 +29,20 @@ const Search = ({restaurants, childClicked, isLoading}) => {
     }
 
 
-    function random(restaurants) {
-        console.log("hi")
+    function random(restaurants, distance) {
+        for (var i = 0; i < restaurants?.length; i++){
+            if (!(parseInt(restaurants[i].distance) * .621 <= parseInt(distance))){
+                restaurants.splice(i,1);
+            }
+        }
+        
         let index = getRandomNumber(0, restaurants?.length)
-        setResult(restaurants[index])
+        if (restaurants?.length == 0) {
+            setFound("No Restaurants Within this Distance")
+        } else {
+            setFound("");
+            setResult(restaurants[index]);
+        }
     }
 
     return (
@@ -47,15 +58,16 @@ const Search = ({restaurants, childClicked, isLoading}) => {
                 <FormControl className={classes.formControl}>
                     <InputLabel>Distance</InputLabel>
                     <Select value ={distance} onChange={(e) => setDistance(e.target.value)}>
-                        <MenuItem value="lessThanMile"> Less Than 1 Mile </MenuItem>
-                        <MenuItem value="withinThree">Within 3 Miles</MenuItem>
-                        <MenuItem value="withinFive">Within 5 Miles</MenuItem>
-                        <MenuItem value="withinTen">Within 10 Miles</MenuItem>
-                        <MenuItem value="withinTwentyFive">Within 25 Miles</MenuItem>
-                        <MenuItem value="anyDistance">25+</MenuItem>
+                        <MenuItem value="1"> Less Than 1 Mile </MenuItem>
+                        <MenuItem value="3">Within 3 Miles</MenuItem>
+                        <MenuItem value="5">Within 5 Miles</MenuItem>
+                        <MenuItem value="10">Within 10 Miles</MenuItem>
+                        <MenuItem value="25">Within 25 Miles</MenuItem>
+                        <MenuItem value="100">All</MenuItem>
                     </Select>
                 </FormControl>
-                <button onClick={() => random(restaurants)}>Search</button>
+                <h4>{found}</h4>
+                <button onClick={() => random(restaurants, distance)}>Search</button>
 
 
                 <Typography variant="h4">Targeted Search</Typography>
@@ -81,10 +93,11 @@ const Search = ({restaurants, childClicked, isLoading}) => {
                 {/* <Button /> */}
 
                 {/* <Typography variant="h5">Result</Typography> */}
+        
                 <PlaceDetails
-                            restaurant={result}
+                    restaurant={result}
                 />
-
+                
                 {/*display result*/}
                 <Grid container spacing={2} className={classes.Search}>
                     {/* {restaurants?.map((restaurant,i) => (
