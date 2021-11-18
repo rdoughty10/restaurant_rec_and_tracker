@@ -1,10 +1,9 @@
-import Home from '../src/components/Pages/Home'
+import Help from '../src/components/Pages/Help'
 import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
 import { shallow, configure, ReactWrapper } from 'enzyme';
-import { ExpansionPanelActions } from '@material-ui/core';
 configure({adapter: new Adapter()});
 
 it("renders without crashing", () => {
-    shallow(<Home />);
+    shallow(<Help />);
 });

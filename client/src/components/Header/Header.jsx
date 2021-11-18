@@ -14,18 +14,18 @@ const Header = () => {
     const [user, setUser] = useState({});
     const [loggedIn, setLoggedIn] = useState("");
 
-    useEffect(() => {
-        Axios.get('http://localhost:3001/api/user/get').then((response) => {
-          console.log(response)
-          if (response.data.loggedIn == true){
-            setUser(response.data.user[0])
-            setLoggedIn("Logout")
-          }else{
-            setUser({})
-            setLoggedIn("Login/Register")
-          }
-        });
-      }, [])
+    // useEffect(() => {
+    //     Axios.get('http://localhost:3001/api/user/get').then((response) => {
+    //       console.log(response)
+    //       if (response.data.loggedIn == true){
+    //         setUser(response.data.user[0])
+    //         setLoggedIn("Logout")
+    //       }else{
+    //         setUser({})
+    //         setLoggedIn("Login/Register")
+    //       }
+    //     });
+    //   }, [])
     
     return (
         <nav className='navbar'>
@@ -64,7 +64,7 @@ const Header = () => {
                     </Link>
                 </li>
             </ul>
-                <Button text={loggedIn}/>
+                <Button text={"Login/Logout"}/>
         </nav>
     );
             

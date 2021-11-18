@@ -1,8 +1,7 @@
 import Login from '../src/components/Login/Login'
 import React from 'react';
-import Adapter from 'enzyme-adapter-react-16';
 import { shallow, configure, mount } from 'enzyme';
-configure({adapter: new Adapter()});
+import { BrowserRouter } from 'react-router-dom';
 
 it("renders without crashing", () => {
     shallow(<Login />);
@@ -67,3 +66,12 @@ it('should render a register button', () => {
     const wrapper = shallow(<Login />);
     expect(wrapper.find('button[name="register"]').exists()).toBe(true);
 });
+
+it("renders without crashing", () => {
+  mount(
+    <BrowserRouter>
+        <Login />
+    </BrowserRouter>
+);
+});
+

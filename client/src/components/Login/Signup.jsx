@@ -67,6 +67,7 @@ function Signup() {
             type="text" 
             placeholder = "Enter First Name"
             name="firstName" 
+            value = {firstName}
             required
             onChange={(e)=>{
               setFirstName(e.target.value)
@@ -76,6 +77,8 @@ function Signup() {
           <label htmlFor = "lastName"> <b>Last Name:</b> </label>
             <input 
               type = "text"
+              name = "lastName"
+              value = {lastName}
               placeholder = "Enter Last Name"
               required 
               onChange={(e)=>{
@@ -86,6 +89,8 @@ function Signup() {
           <label htmlFor = "email"><b>Email: </b></label>
             <input
               type = "text"
+              name = "email"
+              value = {email}
               placeholder = "Enter Email"
               required
               onChange={(e)=>{
@@ -96,6 +101,7 @@ function Signup() {
           <label htmlFor = "password"><b>Password: </b></label>
             <input
               type = "password"
+              value = {password}
               placeholder = "Enter Password"
               required 
               onChange={(e)=>{
@@ -109,7 +115,7 @@ function Signup() {
               <button type = "button" class="cancelbutton">Already have an account?</button>
             </Link>
             
-            <button onClick={register}>Register</button>
+            <button onClick={register} name="Register">Register</button>
             
           </div>
         </div>
