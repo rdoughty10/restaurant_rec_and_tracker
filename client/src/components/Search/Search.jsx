@@ -31,74 +31,80 @@ const Search = ({restaurants, childClicked, isLoading}) => {
 
 
     function random(restaurants, distance) {
-        const randomRestaurants = [];
-        for (var i = 0; i < restaurants?.length; i++){
-            randomRestaurants[i] = restaurants[i];
-        }        
-        for (var i = 0; i < randomRestaurants?.length; i++){
-            if (!(parseInt(randomRestaurants[i].distance) * .621 <= parseInt(distance))){
-                randomRestaurants.splice(i,1);
-                i--;
+        if(distance !== ""){
+            const randomRestaurants = [];
+            for (var i = 0; i < restaurants?.length; i++){
+                randomRestaurants[i] = restaurants[i];
+            }        
+            for (var i = 0; i < randomRestaurants?.length; i++){
+                if (!(parseInt(randomRestaurants[i].distance) * .621 <= parseInt(distance))){
+                    randomRestaurants.splice(i,1);
+                    i--;
+                }
             }
-        }
-        
-        let index = getRandomNumber(0, randomRestaurants?.length)
-        if (randomRestaurants?.length == 0) {
-            setrandomFound("No Restaurants Within this Distance")
-        } else {
-            if ((typeof randomRestaurants[index]) === "undefined"){
-                setrandomFound("Error. Please search again.");
+            
+            let index = getRandomNumber(0, randomRestaurants?.length)
+            if (randomRestaurants?.length == 0) {
+                setrandomFound("Error. No restaurants within this distance.")
             } else {
-                setrandomFound("");
-                setResult(randomRestaurants[index]);
+                if ((typeof randomRestaurants[index]) === "undefined"){
+                    setrandomFound("Error. Please search again.");
+                } else {
+                    setrandomFound("");
+                    setResult(randomRestaurants[index]);
+                }
             }
+        } else {
+            setrandomFound("Error. Please enter a distance.");
         }
     }
 
     function target(restaurants, distance, foodtype, price) {
-        const targetRestaurants = [];
-        for (var i = 0; i < restaurants?.length; i++){
-            targetRestaurants[i] = restaurants[i];
-        }
-
-        for (var i = 0; i < targetRestaurants?.length; i++){
-            var cuisineType = false
-            var distanceFound = false
-            var priceLevel = false
-
-            if (((parseInt(targetRestaurants[i].distance) * .621 <= parseInt(distance)))) {
-                distanceFound = true;
+        if((distance !== "") && (foodtype !== "") && (price !== "")) {
+            const targetRestaurants = [];
+            for (var i = 0; i < restaurants?.length; i++){
+                targetRestaurants[i] = restaurants[i];
             }
 
-            for(var j = 0; j < targetRestaurants[i].cuisine?.length; j++) {
-                if(targetRestaurants[i].cuisine[j].name === foodtype) {
-                    cuisineType = true;
+            for (var i = 0; i < targetRestaurants?.length; i++){
+                var cuisineType = false
+                var distanceFound = false
+                var priceLevel = false
+
+                if (((parseInt(targetRestaurants[i].distance) * .621 <= parseInt(distance)))) {
+                    distanceFound = true;
+                }
+
+                for(var j = 0; j < targetRestaurants[i].cuisine?.length; j++) {
+                    if(targetRestaurants[i].cuisine[j].name === foodtype) {
+                        cuisineType = true;
+                    }
+                }
+
+                if ((targetRestaurants[i].price_level === price)) {
+                    priceLevel = true;
+                }
+                
+                if (!((distanceFound) && (cuisineType)  && (priceLevel))) {
+                    targetRestaurants.splice(i,1);
+                    i--;
+                }
+
+            }
+
+            let index = getRandomNumber(0, targetRestaurants?.length)
+            if (targetRestaurants?.length == 0) {
+                settargetFound("Error. No restaurants found with these criteria.")
+            } else {
+                if ((typeof targetRestaurants[index]) === "undefined"){
+                    settargetFound("Error. Please search again.");
+                } else {
+                    settargetFound("");
+                    setResult(targetRestaurants[index]);
                 }
             }
-
-            if ((targetRestaurants[i].price_level === price)) {
-                priceLevel = true;
-            }
-            
-            if (!((distanceFound) && (cuisineType)  && (priceLevel))) {
-                targetRestaurants.splice(i,1);
-                i--;
-            }
-
-        }
-
-        console.log(restaurants)
-        console.log(targetRestaurants)
-        let index = getRandomNumber(0, targetRestaurants?.length)
-        if (targetRestaurants?.length == 0) {
-            settargetFound("Error. No restaurants found with these criteria.")
         } else {
-            if ((typeof targetRestaurants[index]) === "undefined"){
-                settargetFound("Error. Please search again.");
-            } else {
-                settargetFound("");
-                setResult(targetRestaurants[index]);
-            }
+            settargetFound("Error. Please select all criteria.");
         }
     }
 
