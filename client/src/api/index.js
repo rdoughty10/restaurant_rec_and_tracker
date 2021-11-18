@@ -16,7 +16,7 @@ export const getRestaurantData = async (sw, ne) => {
           // restaurant_tagcategory: '10591',
           // limit: '30',
           // currency: 'USD',
-          // open_now: 'false',
+          // open_now: 'true',
           // lunit: 'km',
           // lang: 'en_US'
         },

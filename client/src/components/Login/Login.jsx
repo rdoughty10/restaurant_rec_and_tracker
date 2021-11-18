@@ -69,6 +69,7 @@ function Login() {
             <label htmlFor = "email"><b>Email: </b></label>
               <input
                 type = "text"
+                value = {email}
                 placeholder = "Enter Email"
                 required
                 onChange={(e)=>{
@@ -79,6 +80,7 @@ function Login() {
             <label htmlFor = "password"><b>Password: </b></label>
               <input
                 type = "password"
+                value = {password}
                 placeholder = "Enter Password"
                 required 
                 onChange={(e)=>{
@@ -88,14 +90,14 @@ function Login() {
   
             {/* Submit and Cancel Buttons */}
             <div className = "clearfix">
-              <button onClick={logout}>Logout</button>
+              <button onClick={logout} name="logout">Logout</button>
             </div>
   
             <p>Don't already have an account? Sign up today.</p>
             {/* Submit and Cancel Buttons */}
             <div className = "clearfix">
               <Link to='/sign-up'>
-                <button>Register</button>
+                <button name="register">Register</button>
               </Link>
             </div>
           </div>
@@ -115,6 +117,7 @@ function Login() {
             <label htmlFor = "email"><b>Email: </b></label>
               <input
                 type = "text"
+                value = {email}
                 placeholder = "Enter Email"
                 required
                 onChange={(e)=>{
@@ -125,6 +128,7 @@ function Login() {
             <label htmlFor = "password"><b>Password: </b></label>
               <input
                 type = "password"
+                value = {password}
                 placeholder = "Enter Password"
                 required 
                 onChange={(e)=>{
@@ -134,14 +138,14 @@ function Login() {
   
             {/* Submit and Cancel Buttons */}
             <div className = "clearfix">
-              <button onClick={login}>Login</button>
+              <button onClick={login} name="login">Login</button>
             </div>
   
             <p>Don't already have an account? Sign up today.</p>
             {/* Submit and Cancel Buttons */}
             <div className = "clearfix">
               <Link to='/sign-up'>
-                <button>Register</button>
+                <button name="register">Register</button>
               </Link>
             </div>
           </div>
