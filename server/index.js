@@ -82,17 +82,30 @@ app.post('/api/user/new', (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
 
-    bcrypt.hash(password, saltRounds, (err, hash) =>{
+
+    const sqlCheck = "SELECT * FROM users WHERE email = ?"
+    db.query(sqlCheck, email, (err, result) => {
+
         if (err){
-            console.log(err)
+            res.send({err:err});
+        }else if (firstName == '' || lastName == '' || email =='' || password == ''){
+            res.send({message: "One or more of the required fields is empty"})
+        }else if (result.length > 0){
+            res.send({message: "This email already has an account"})
+        }else{
+            bcrypt.hash(password, saltRounds, (err, hash) =>{
+                if (err){
+                    console.log(err)
+                }
+                const sqlInsert = "INSERT INTO users (firstName, lastName, email, password) VALUES (?,?,?,?);"
+                db.query(sqlInsert, [firstName, lastName, email, hash], (err, result) => {
+                    console.log(result);
+                    res.send({message: "Your account has been created. Welcome, " + firstName + " " + lastName})
+                })
+            })
         }
-        const sqlInsert = "INSERT INTO users (firstName, lastName, email, password) VALUES (?,?,?,?);"
-        db.query(sqlInsert, [firstName, lastName, email, hash], (err, result) => {
-            console.log(result);
-        })
     })
-    
-})
+});
 
 app.listen(3001, () => {
     console.log("running on port 3001")

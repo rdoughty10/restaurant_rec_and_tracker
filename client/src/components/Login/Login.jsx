@@ -26,7 +26,7 @@ function Login() {
           setCurrentUser(response.data.message);
           setLoginStatus(false)
         }else{
-          setCurrentUser(response.data[0].firstName);
+          setCurrentUser("Logged in as " + response.data[0].firstName);
           setLoginStatus(true)
         }
       })
@@ -49,7 +49,7 @@ function Login() {
       Axios.get('http://localhost:3001/api/user/get').then((response) => {
         console.log(response)
         if (response.data.loggedIn == true){
-          setCurrentUser(response.data.user[0].firstName)
+          setCurrentUser("Logged in as " + response.data.user[0].firstName)
           setLoginStatus(true)
         }
       });

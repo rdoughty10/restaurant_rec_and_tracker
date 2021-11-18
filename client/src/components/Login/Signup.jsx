@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Axios from 'axios';
 
 import { Link } from 'react-router-dom'
@@ -18,17 +18,39 @@ function Signup() {
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState("");
 
-    const register = () => (
-      Axios.post('http://localhost:3001/api/user/new', {
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        password: password,
-      }).then((result) => {
-        console.log(result);
-      })
-    )
+    const [loginStatus, setLoginStatus] = useState(false)
+    const [currentUser, setCurrentUser] = useState("")
+
+    const register = () => {
+      if (!loginStatus){
+        Axios.post('http://localhost:3001/api/user/new', {
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          password: password,
+        }).then((result) => {
+          console.log(result);
+          if(result.data.message){
+            setError(result.data.message)
+          }
+        });
+      }else{
+        setError("Please logout before creating a new account")
+      }
+    }
+
+    useEffect(() => {
+      Axios.get('http://localhost:3001/api/user/get').then((response) => {
+        console.log(response)
+        if (response.data.loggedIn == true){
+          setCurrentUser(response.data.user[0].firstName)
+          setLoginStatus(true)
+          setError("Logged in as " + response.data.user[0].firstName + ". Please logout before creating a new account.")
+        }
+      });
+    }, [])
 
     return (
       <>
@@ -37,6 +59,7 @@ function Signup() {
         <h1> Sign Up </h1>
         <p>Enter your your information to create an account.</p>
         <hr></hr>
+        <h4>{error}</h4>
         <div className = "signup-form">
           {/* First Name Box */}
           <label htmlFor = "firstName"><b>First Name:</b></label>
@@ -85,9 +108,9 @@ function Signup() {
             <Link to="/login">
               <button type = "button" class="cancelbutton">Already have an account?</button>
             </Link>
-            <Link to='/login'>
-              <button onClick={register}>Register</button>
-            </Link>
+            
+            <button onClick={register}>Register</button>
+            
           </div>
         </div>
       </>
