@@ -46,8 +46,12 @@ const Search = ({restaurants, childClicked, isLoading}) => {
         if (randomRestaurants?.length == 0) {
             setrandomFound("No Restaurants Within this Distance")
         } else {
-            setrandomFound("");
-            setResult(randomRestaurants[index]);
+            if ((typeof randomRestaurants[index]) === "undefined"){
+                setrandomFound("Error. Please search again.");
+            } else {
+                setrandomFound("");
+                setResult(randomRestaurants[index]);
+            }
         }
     }
 
@@ -87,10 +91,14 @@ const Search = ({restaurants, childClicked, isLoading}) => {
         console.log(targetRestaurants)
         let index = getRandomNumber(0, targetRestaurants?.length)
         if (targetRestaurants?.length == 0) {
-            settargetFound("No Restaurants Within this Distance")
+            settargetFound("Error. No restaurants found with these criteria.")
         } else {
-            settargetFound("");
-            setResult(targetRestaurants[index]);
+            if ((typeof targetRestaurants[index]) === "undefined"){
+                settargetFound("Error. Please search again.");
+            } else {
+                settargetFound("");
+                setResult(targetRestaurants[index]);
+            }
         }
     }
 
