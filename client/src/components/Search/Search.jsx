@@ -9,11 +9,12 @@ const Search = ({restaurants, childClicked, isLoading}) => {
     const [type, setType] = useState('restaurants');
     //const [rating, setRating] = useState('');
     const [distance, setDistance] = useState('');
+    const [Tdistance, setTDistance] = useState('');
     const [price, setPrice] = useState('');
     const [elRefs, setElRefs]= useState([]);
     const [result, setResult] = useState('')
-    const [found, setFound] = useState('')
-
+    const [randomFound, setrandomFound] = useState('')
+    const [targetFound, settargetFound] = useState('')
 
     useEffect(() => {
         const refs = Array(restaurants?.length).fill().map((_ , i) => elRefs[i] || createRef());
@@ -30,18 +31,66 @@ const Search = ({restaurants, childClicked, isLoading}) => {
 
 
     function random(restaurants, distance) {
+        const randomRestaurants = [];
         for (var i = 0; i < restaurants?.length; i++){
-            if (!(parseInt(restaurants[i].distance) * .621 <= parseInt(distance))){
-                restaurants.splice(i,1);
+            randomRestaurants[i] = restaurants[i];
+        }        
+        for (var i = 0; i < randomRestaurants?.length; i++){
+            if (!(parseInt(randomRestaurants[i].distance) * .621 <= parseInt(distance))){
+                randomRestaurants.splice(i,1);
+                i--;
             }
         }
         
-        let index = getRandomNumber(0, restaurants?.length)
-        if (restaurants?.length == 0) {
-            setFound("No Restaurants Within this Distance")
+        let index = getRandomNumber(0, randomRestaurants?.length)
+        if (randomRestaurants?.length == 0) {
+            setrandomFound("No Restaurants Within this Distance")
         } else {
-            setFound("");
-            setResult(restaurants[index]);
+            setrandomFound("");
+            setResult(randomRestaurants[index]);
+        }
+    }
+
+    function target(restaurants, distance, foodtype, price) {
+        const targetRestaurants = [];
+        for (var i = 0; i < restaurants?.length; i++){
+            targetRestaurants[i] = restaurants[i];
+        }
+
+        for (var i = 0; i < targetRestaurants?.length; i++){
+            var cuisineType = false
+            var distanceFound = false
+            var priceLevel = false
+
+            if (((parseInt(targetRestaurants[i].distance) * .621 <= parseInt(distance)))) {
+                distanceFound = true;
+            }
+
+            for(var j = 0; j < targetRestaurants[i].cuisine?.length; j++) {
+                if(targetRestaurants[i].cuisine[j].name === foodtype) {
+                    cuisineType = true;
+                }
+            }
+
+            if ((targetRestaurants[i].price_level === price)) {
+                priceLevel = true;
+            }
+            
+            if (!((distanceFound) && (cuisineType)  && (priceLevel))) {
+                targetRestaurants.splice(i,1);
+                i--;
+            }
+
+        }
+
+        console.log(restaurants)
+        console.log(targetRestaurants)
+        let index = getRandomNumber(0, targetRestaurants?.length)
+        if (targetRestaurants?.length == 0) {
+            settargetFound("No Restaurants Within this Distance")
+        } else {
+            settargetFound("");
+            setResult(targetRestaurants[index]);
         }
     }
 
@@ -66,30 +115,48 @@ const Search = ({restaurants, childClicked, isLoading}) => {
                         <MenuItem value="100">All</MenuItem>
                     </Select>
                 </FormControl>
-                <h4>{found}</h4>
+                <h4>{randomFound}</h4>
                 <button onClick={() => random(restaurants, distance)}>Search</button>
 
 
                 <Typography variant="h4">Targeted Search</Typography>
                 <FormControl className={classes.formControl}>
+                    <InputLabel>Distance</InputLabel>
+                    <Select value ={Tdistance} onChange={(e) => setTDistance(e.target.value)}>
+                        <MenuItem value="1"> Less Than 1 Mile </MenuItem>
+                        <MenuItem value="3">Within 3 Miles</MenuItem>
+                        <MenuItem value="5">Within 5 Miles</MenuItem>
+                        <MenuItem value="10">Within 10 Miles</MenuItem>
+                        <MenuItem value="25">Within 25 Miles</MenuItem>
+                        <MenuItem value="100">All</MenuItem>
+                    </Select>
+                </FormControl>
+
+                <FormControl className={classes.formControl}>
                     <InputLabel>Type of Cuisine</InputLabel>
                     <Select value = {type} onChange={(e) => setType(e.target.value)}>
-                        <MenuItem value="fastFood">Fast Food</MenuItem>
-                        <MenuItem value="asian">Asian Cuisine</MenuItem>
-                        <MenuItem value="breakfast">Breakfast</MenuItem>
-                        <MenuItem value="european">European</MenuItem>
-                        <MenuItem value="other">Other</MenuItem>
+                        <MenuItem value="American">American</MenuItem>
+                        <MenuItem value="Mexican">Mexican</MenuItem>
+                        <MenuItem value="Asian">Asian</MenuItem>
+                        <MenuItem value="Italian">Italian</MenuItem>
+                        <MenuItem value="Mediterranean">Mediterranean</MenuItem>
+                        <MenuItem value="Deli">Deli</MenuItem>
+                        <MenuItem value="Cafe">Cafe</MenuItem>
+                        <MenuItem value="Vegan Options">Vegan Options</MenuItem>
+                        <MenuItem value="Gluten Free Options">Gluten Free Options</MenuItem>
                     </Select>
                 </FormControl>
 
                 <FormControl className={classes.formControl}>
                     <InputLabel>Price</InputLabel>
                     <Select value = {price} onChange={(e) => setPrice(e.target.value)}>
-                        <MenuItem value="cheap">Cheap $</MenuItem>
-                        <MenuItem value="average">Average $$</MenuItem>
-                        <MenuItem value="expensive">Expensive $$$</MenuItem>
+                        <MenuItem value="$">Cheap $</MenuItem>
+                        <MenuItem value="$$ - $$$">Average $$-$$$</MenuItem>
+                        <MenuItem value="$$$$">Expensive $$$$</MenuItem>
                     </Select>
                 </FormControl>
+                <h4>{targetFound}</h4>
+                <button onClick={() => target(restaurants, Tdistance, type, price)}>Search</button>
                 {/* <Button /> */}
 
                 {/* <Typography variant="h5">Result</Typography> */}
