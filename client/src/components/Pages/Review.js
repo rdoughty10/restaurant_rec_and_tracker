@@ -6,6 +6,8 @@ import Header from '../Header/Header';
 import StarRating from '../StarRating';
 import './ReviewPage.css'
 import { useLocation } from 'react-router-dom'
+import PlaceDetailsReview from '../PlaceDetails/PlaceDetailsReview';
+
 
 
 const Review = () => {
@@ -20,17 +22,31 @@ const Review = () => {
         <>
             <CssBaseline />
             <Header />
-            <h1>{restaurant.restaurant.name}</h1>
-            <Typography variant="h4">
-                Leave a Review:
-                {/* {restaurant.name} */}
-            </Typography>
             <Grid container spacing={3} style={{width: '100%'}}>
-                <Grid item xs={12} md={12}>
-                    <div className="Review">
-                        <StarRating setRatingForm={setRating}/>
-                    </div>
+                <Grid item xs={12} md={5}>
+                    <Typography variant="h3">
+                        Leave a Review:
+                    </Typography>
+                    <Typography variant="h5">
+                        Out of 5 Stars:
+                    </Typography>
+                    <Grid container spacing={3} style={{width: '100%'}}>
+                        <Grid item xs={12} md={12}>
+                            <div className="Review">
+                                <StarRating setRatingForm={setRating}/>
+                            </div>
+                        </Grid>
+                    </Grid>
+                    <Typography variant="h5">
+                        Additional Comments:
+                    </Typography>
                 </Grid>
+                <Grid item xs={12} md={7}>
+                    <PlaceDetailsReview 
+                        restaurant={restaurant.restaurant}
+                    />
+                </Grid>
+            
             </Grid>
         </>
     );
