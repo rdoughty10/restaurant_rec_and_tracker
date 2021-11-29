@@ -107,6 +107,32 @@ app.post('/api/user/new', (req, res) => {
     })
 });
 
+
+app.post('/api/reviews/new', (req, res) => {
+
+    const userID = req.body.userID;
+    const restaurantName = req.body.restaurantName;
+    const restaurantLat = req.body.restaurantLat;
+    const restaurantLng = req.body.restaurantLng;
+    const rating = req.body.rating;
+    const review = req.body.review;
+
+    const sqlInsert = "INSERT INTO reviews (userID, restaurantName, restaurantLat, restaurantLng, rating, review) VALUES (?,?,?,?,?,?);"
+    if (userID == null){
+        res.send({message: "You must be logged in to submit a review"})
+    }else{
+        db.query(sqlInsert, [userID, restaurantName, restaurantLat, restaurantLng, rating, review], (err, result) => {
+            if (err){
+                console.log(err)
+            }else{
+                console.log(result);
+                res.send({message: "Your review has been created"})
+            }
+        })
+    }
+            
+});
+
 app.listen(3001, () => {
     console.log("running on port 3001")
 });

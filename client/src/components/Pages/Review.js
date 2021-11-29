@@ -1,10 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import Axios from 'axios';
 
-import { Link } from 'react-router-dom'
-import {Box, Typography, Button, Card, CardMedia, CardContent, CardActions, Chip} from '@material-ui/core';
+import {Typography} from '@material-ui/core';
 import { CssBaseline, Grid } from '@material-ui/core';
-import { getRestaurantData } from '../../api';
 import Header from '../Header/Header';
 import StarRating from '../StarRating';
 import './ReviewPage.css'
@@ -13,8 +11,7 @@ import PlaceDetailsReview from '../PlaceDetails/PlaceDetailsReview';
 
 
 
-const Review = () => {
-    //const { restaurant } = useParams()
+function Review() {
     const location = useLocation();
     const { restaurant } = location.state;
 
@@ -24,43 +21,47 @@ const Review = () => {
     const [loginStatus, setLoginStatus] = useState(false)
     const [currentUser, setCurrentUser] = useState(null)
     const [error, setError] = useState("")
-    
 
-    useEffect(() => {
-        Axios.get('http://localhost:3001/api/user/get').then((response) => {
-          console.log(response)
-          if (response.data.loggedIn == true){
-            setCurrentUser(response.data.user[0].id)
-            setLoginStatus(true)
-          }else{
-            setCurrentUser(null)
-            setLoginStatus(false)
-          }
-        });
-      }, [])
+    Axios.defaults.withCredentials = true;
 
     console.log(restaurant)
-    const submitReview = () => {
-        if (loginStatus){
-          Axios.post('http://localhost:3001/api/review/submit', {
+
+
+
+    const submitReview = () => {    
+        Axios.post('http://localhost:3001/api/reviews/new', {
             userID: currentUser,
             restaurantName: restaurant.restaurant.name,
             restaurantLat: restaurant.restaurant.latitude,
             restaurantLng: restaurant.restaurant.longitude,
             rating: rating,
             review: review,
-          }).then((result) => {
+        }).then((result) => {
             console.log(result);
-          });
-        }else{
-          setError("Please login before creating a review")
-        }
-      }
+            setError(result.data.message)
+        })
+    }
+    
+
+    useEffect(() => {
+        Axios.get('http://localhost:3001/api/user/get').then((response) => {
+            console.log(response)
+            if (response.data.loggedIn == true){
+                setCurrentUser(response.data.user[0].id)
+                setLoginStatus(true)
+            }else{
+                setCurrentUser(null)
+                setLoginStatus(false)
+            }
+        });
+    }, [])
+
 
     return (
         <>
             <CssBaseline />
             <Header />
+            <h2>{currentUser}{restaurant.restaurant.name}{restaurant.restaurant.latitude}{rating}{review}</h2>
             <Grid container spacing={3} style={{width: '100%'}}>
                 <Grid item xs={12} md={5}>
                     <Typography variant="h3">
@@ -101,6 +102,7 @@ const Review = () => {
                         }}
                     />
                     <button onClick={submitReview} name="submitReview">Submit</button>
+                    <h4>{error}</h4>
                 </Grid>
                 
                 <Grid item xs={12} md={7}>
