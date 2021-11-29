@@ -83,23 +83,25 @@ function Review() {
                             Additional Comments:
                         </Typography>
                     </Grid>
-                    <label htmlFor = "textReview" variant="h5"></label>
-                    <input 
-                        type="text" 
-                        placeholder = "Enter your review"
-                        name="textReview" 
-                        multiline={true} 
-                        numberOfLines={10}
-                        maxLength={1000}
-                        style={{width: "550px", height:"100px",
+                    
+                    <label htmlfor="textReview" variant="h5"></label>
+                    <textarea 
+                      type="text"
+                      placeHolder="Enter your review"
+                      name="textReview"
+                      multiline={true}
+                      numberOfLines={3}
+                      maxLength={140}
+                      style={{width: "550px", height:"100px",
                         fontSize: 18,
-                        textAlignVertical:"top"
+                        textAlignVertical:"top",
+                        fontFamily: "roboto"
                         }}
-                        value = {review}
-                        required
-                        onChange={(e)=>{
-                        setReview(e.target.value)
-                        }}
+                      value = {review}
+                      required
+                      onChange={(e)=>{
+                      setReview(e.target.value)
+                      }}
                     />
                     <button onClick={submitReview} name="submitReview">Submit</button>
                     <h4>{error}</h4>
