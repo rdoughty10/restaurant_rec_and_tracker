@@ -38,7 +38,29 @@ return (
     <CssBaseline />
     <Header />
     <h1> {restaurant.restaurant.name}'s Reviews</h1>
-    <Grid container spacing={3} style={{width: '100%'}}>
+    <CardContent>
+            <Grid container spacing={3} style={{width: '100%'}}>
+                {Array.from(reviews)?.map((review, i) => (
+                    <Grid item xs={12} md={7}>
+                        <Grid item xs={12} md={12}>
+                        <h2> {"Review " + i + ":"}</h2>
+                            <Box display='flex' justifyContent='space-between'>
+                                <Rating value={Number(review.rating)} readOnly/>
+                            </Box>
+                            {/*<h4> {review.rating}/5</h4>*/}
+                            <Grid item xs={12} md={12}>
+                                <p> Additional Comments:</p>
+                            </Grid>  
+                            <p> {review.review}</p>
+                        </Grid>  
+                    </Grid>  
+                    
+                ))}
+                        
+            </Grid>
+        </CardContent>
+        </>
+    /* <Grid container spacing={3} style={{width: '100%'}}>
         {Array.from(reviews)?.map((review, i) => (
             <Grid item xs={12} md={12}>
                 <h2> {"Review " + i + ":"}</h2>
@@ -49,7 +71,7 @@ return (
         ))}
                     
     </Grid>
-    </>   
+    </>    */
 );
 
 } 

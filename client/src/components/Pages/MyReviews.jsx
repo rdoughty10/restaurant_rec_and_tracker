@@ -1,7 +1,7 @@
 import React, { useState, useEffect }  from 'react';
 import { CssBaseline, Grid, Typography } from '@material-ui/core';
 import Axios from 'axios';
-
+import {Box, Typography, Button, Card, CardMedia, CardContent, CardActions, Chip} from '@material-ui/core';
 import Header from '../Header/Header';
 import 'regenerator-runtime/runtime'
 
@@ -43,17 +43,27 @@ const MyReviews = () => {
         <CssBaseline />
         <Header />
         <h1> {user.firstName + " " + user.lastName}'s Reviews</h1>
-        <Grid container spacing={3} style={{width: '100%'}}>
-            {Array.from(reviews)?.map((review, i) => (
-                <Grid item xs={12} md={12}>
-                    <h2> {review.restaurantName}</h2>
-                    <h4> {review.rating}/5</h4>
-                    <p> {review.review}</p>
-
-                </Grid>  
-            ))}
-                     
-        </Grid>
+        <CardContent>
+            <Grid container spacing={3} style={{width: '100%'}}>
+                {Array.from(reviews)?.map((review, i) => (
+                    <Grid item xs={12} md={7}>
+                        <Grid item xs={12} md={12}>
+                            <h2> {review.restaurantName}</h2>
+                            <Box display='flex' justifyContent='space-between'>
+                                <Rating value={Number(review.rating)} readOnly/>
+                            </Box>
+                            {/*<h4> {review.rating}/5</h4>*/}
+                            <Grid item xs={12} md={12}>
+                                <p> Additional Comments:</p>
+                            </Grid>  
+                            <p> {review.review}</p>
+                        </Grid>  
+                    </Grid>  
+                    
+                ))}
+                        
+            </Grid>
+        </CardContent>
         </>   
     );
     } else {
