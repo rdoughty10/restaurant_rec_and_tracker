@@ -61,6 +61,17 @@ const PlaceDetails = ({restaurant, selected, refProp}) => {
                     <Button size="small" color="primary" onClick={() => window.open(restaurant.website, '_blank')}>
                         Website
                     </Button>
+                    <Button size="small" color="primary">
+                    
+                        <Link to={{
+                        pathname: '/restaurantreviews',
+                        state: {
+                            restaurant: {restaurant}
+                        }
+                        }}>
+                        See Reviews
+                        </Link>
+                    </Button>
                 </CardActions>
             </CardContent>    
         </Card>

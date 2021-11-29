@@ -14,6 +14,7 @@ import Help from "./components/Pages/Help"
 import LoginPage from "./components/Pages/LoginPage"
 import Review from "./components/Pages/Review"
 import MyReviews from "./components/Pages/MyReviews"
+import RestaurantReviews from "./components/Pages/RestaurantReviews"
 
 function App(){
 
@@ -29,6 +30,7 @@ function App(){
             <Route path="/login" exact component={LoginPage} />
             <Route path="/review" component={Review} />
             <Route path="/myreviews" exact component={MyReviews}/>
+            <Route path="/restaurantreviews" exact component={RestaurantReviews}/>
         </Switch>
       </Router> 
 

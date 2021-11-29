@@ -4,6 +4,8 @@ import Axios from 'axios';
 
 import Header from '../Header/Header';
 import 'regenerator-runtime/runtime'
+import { useLocation } from 'react-router-dom'
+
 
 const MyReviews = () => {
 
@@ -15,67 +17,41 @@ const MyReviews = () => {
   const [loggedIn, setLoggedIn] = useState(false)
 
   const [reviews, setReviews] = useState({});
+  const location = useLocation();
+  const { restaurant } = location.state;
 
 
 
   useEffect(() => {
-    Axios.get('http://localhost:3001/api/user/get').then((response) => {
-      console.log(response)
-      if (response.data.loggedIn == true){
-        Axios.post('http://localhost:3001/api/reviews/user', {
-            userID: response.data.user[0].id,
+    Axios.post('http://localhost:3001/api/reviews/restaurant', {
+            restaurantName: restaurant.restaurant.name,
+            restaurantLat: restaurant.restaurant.latitude,
+            restaurantLng: restaurant.restaurant.longitude,
         }).then((response) => {
             console.log(response)
             setReviews(response.data)
         })
-        setUser(response.data.user[0])
-        setLoggedIn(true)
-      }else{
-        setUser({})
-        setLoggedIn(false)
-      }
-    });
   }, [])
 
-  if(loggedIn) {
-    return (
-        <>
-        <CssBaseline />
-        <Header />
-        <h1> {user.firstName + " " + user.lastName}'s Reviews</h1>
-        <Grid container spacing={3} style={{width: '100%'}}>
-            {Array.from(reviews)?.map((review, i) => (
-                <Grid item xs={12} md={12}>
-                    <h2> {review.restaurantName}</h2>
-                    <h4> {review.rating}/5</h4>
-                    <p> {review.review}</p>
+return (
+    <>
+    <CssBaseline />
+    <Header />
+    <h1> {restaurant.restaurant.name}'s Reviews</h1>
+    <Grid container spacing={3} style={{width: '100%'}}>
+        {Array.from(reviews)?.map((review, i) => (
+            <Grid item xs={12} md={12}>
+                <h2> {"Review " + i + ":"}</h2>
+                <h4> {review.rating}/5</h4>
+                <p> {review.review}</p>
 
-                </Grid>  
-            ))}
-                     
-        </Grid>
-        </>   
-    );
-    } else {
-        return (
-            <>
-        <CssBaseline />
-        <Header />
-        <Grid container spacing={3} style={{width: '100%'}}>
-            <Grid item xs={12} md={12}>
-                <Typography variant="h4">
-                    Please login to access your reviews.
-                </Typography>
-            </Grid> 
-            <Grid item xs={12} md={12}>
-                <Typography variant="h5">
-                    The login button is in the top right of the screen.
-                </Typography>
-            </Grid>          
-        </Grid>
-        </>       
-    );
-    }
+            </Grid>  
+        ))}
+                    
+    </Grid>
+    </>   
+);
+
 } 
 
 export default MyReviews
