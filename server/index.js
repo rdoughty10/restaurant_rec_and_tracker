@@ -133,6 +133,23 @@ app.post('/api/reviews/new', (req, res) => {
             
 });
 
+app.post("/api/reviews/user", (req, res) => {
+    const userID = req.body.userID;
+    const sqlSelect = "SELECT * FROM reviews WHERE userID = ?;"
+    db.query(sqlSelect, [userID], (err, result) => {
+
+        if (err){
+            res.send({err:err});
+        }
+        // if (result.length > 0){
+        //     res.send(result);
+        // }else{
+        //     res.send({message: "No reviews from this user"});
+        // }
+        res.send(result);
+    })
+})
+
 app.listen(3001, () => {
     console.log("running on port 3001")
 });

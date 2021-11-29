@@ -14,12 +14,20 @@ const MyReviews = () => {
   const [user, setUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false)
 
+  const [reviews, setReviews] = useState({});
+
 
 
   useEffect(() => {
     Axios.get('http://localhost:3001/api/user/get').then((response) => {
       console.log(response)
       if (response.data.loggedIn == true){
+        Axios.post('http://localhost:3001/api/reviews/user', {
+            userID: response.data.user[0].id,
+        }).then((response) => {
+            console.log(response)
+            setReviews(response.data)
+        })
         setUser(response.data.user[0])
         setLoggedIn(true)
       }else{
@@ -34,20 +42,17 @@ const MyReviews = () => {
         <>
         <CssBaseline />
         <Header />
+        <h1> {user.firstName + " " + user.lastName}'s Reviews</h1>
         <Grid container spacing={3} style={{width: '100%'}}>
-            <Grid item xs={12} md={12}>
-                {/* <Typography variant="h5">
-                    {user.firstName}'s Reviews:
-                </Typography> */}
+            {Array.from(reviews)?.map((review, i) => (
                 <Grid item xs={12} md={12}>
-                    <Grid item xs={12} md={6}>
-                        {/* Name and 5 star rating */}
-                    </Grid>
-                    <Grid item xs={12} md={6}>
-                        {/* Additional comments */}
-                    </Grid>
-                </Grid>
-            </Grid>           
+                    <h2> {review.restaurantName}</h2>
+                    <h4> {review.rating}/5</h4>
+                    <p> {review.review}</p>
+
+                </Grid>  
+            ))}
+                     
         </Grid>
         </>   
     );
