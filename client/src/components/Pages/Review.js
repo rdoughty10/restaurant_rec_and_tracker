@@ -90,7 +90,7 @@ const Review = () => {
                         multiline={true} 
                         numberOfLines={10}
                         maxLength={1000}
-                        style={{width: "500px", height:"100px",
+                        style={{width: "550px", height:"100px",
                         fontSize: 18,
                         textAlignVertical:"top"
                         }}
@@ -100,8 +100,9 @@ const Review = () => {
                         setReview(e.target.value)
                         }}
                     />
+                    <button onClick={submitReview} name="submitReview">Submit</button>
                 </Grid>
-                <button onClick={submitReview} name="submitReview">Submit</button>
+                
                 <Grid item xs={12} md={7}>
                     <PlaceDetailsReview 
                         restaurant={restaurant.restaurant}
