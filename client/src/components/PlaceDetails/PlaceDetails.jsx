@@ -11,6 +11,7 @@ import { Link, Router } from 'react-router-dom'
 const PlaceDetails = ({restaurant, selected, refProp}) => {
     if (selected) refProp?.current?.scrollIntoView({behaviour: "smooth", block: "start"})
     const classes = useStyles();
+
     return (
         <Card elevation={6}>
             <CardMedia
@@ -47,7 +48,12 @@ const PlaceDetails = ({restaurant, selected, refProp}) => {
                 <CardActions>
                     <Button size="small" color="primary">
                     
-                        <Link to= '/review'>
+                        <Link to={{
+                        pathname: '/review',
+                        state: {
+                            restaurant: {restaurant}
+                        }
+                        }}>
                         Leave a Review
                         </Link>
                         
