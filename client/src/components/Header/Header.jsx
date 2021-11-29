@@ -51,16 +51,16 @@ const Header = () => {
                     className='nav-links'
                     onClick={closeMobileMenu}
                     >
-                        About Us <i className='fas fa-caret-down' />
+                        About Us/FAQ <i className='fas fa-caret-down' />
                     </Link>
                 </li>
                 <li className='nav-item'>
                     <Link
-                    to='/help'
+                    to='/myreviews'
                     className='nav-links'
                     onClick={closeMobileMenu}
                     >
-                        Help/FAQ
+                        My Reviews
                     </Link>
                 </li>
             </ul>

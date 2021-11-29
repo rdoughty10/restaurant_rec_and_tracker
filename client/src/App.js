@@ -13,7 +13,7 @@ import SignUp from "./components/Pages/Sign-Up"
 import Help from "./components/Pages/Help"
 import LoginPage from "./components/Pages/LoginPage"
 import Review from "./components/Pages/Review"
-import Reviews from "./components/Pages/Reviews"
+import MyReviews from "./components/Pages/MyReviews"
 
 function App(){
 
@@ -28,7 +28,7 @@ function App(){
             <Route path="/sign-up" exact component={SignUp} />
             <Route path="/login" exact component={LoginPage} />
             <Route path="/review" component={Review} />
-            <Route path="/myreviews" exact component={Reviews}/>
+            <Route path="/myreviews" exact component={MyReviews}/>
         </Switch>
       </Router> 
 
