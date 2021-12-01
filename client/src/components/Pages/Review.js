@@ -61,7 +61,7 @@ function Review() {
         <>
             <CssBaseline />
             <Header />
-            <h2>{currentUser}{restaurant.restaurant.name}{restaurant.restaurant.latitude}{rating}{review}</h2>
+            <h2>Writing a review for {restaurant.restaurant.name}</h2>
             <Grid container spacing={3} style={{width: '100%'}}>
                 <Grid item xs={12} md={5}>
                     <Typography variant="h3">

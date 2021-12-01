@@ -150,6 +150,26 @@ app.post("/api/reviews/user", (req, res) => {
     })
 })
 
+app.post("/api/reviews/restaurant", (req, res) => {
+    const restaurantName = req.body.restaurantName;
+    // const restaurantLat = req.body.restaurantLat;
+    // const restaurantLng = req.body.restaurantLng;
+
+    const sqlSelect = "SELECT * FROM reviews WHERE restaurantName = ?;"
+    db.query(sqlSelect, [restaurantName], (err, result) => {
+
+        if (err){
+            res.send({err:err});
+        }
+        // if (result.length > 0){
+        //     res.send(result);
+        // }else{
+        //     res.send({message: "No reviews from this user"});
+        // }
+        res.send(result);
+    })
+})
+
 app.listen(3001, () => {
     console.log("running on port 3001")
 });

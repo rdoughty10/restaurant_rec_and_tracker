@@ -1,7 +1,7 @@
 import React, { useState, useEffect }  from 'react';
-import { CssBaseline, Grid, Typography } from '@material-ui/core';
+import { CssBaseline, Grid, Typography, Box, CardContent, Card, CardMedia} from '@material-ui/core';
+import Rating from '@material-ui/lab/Rating';
 import Axios from 'axios';
-import {Box, Typography, Button, Card, CardMedia, CardContent, CardActions, Chip} from '@material-ui/core';
 import Header from '../Header/Header';
 import 'regenerator-runtime/runtime'
 
@@ -43,6 +43,11 @@ const MyReviews = () => {
         <CssBaseline />
         <Header />
         <h1> {user.firstName + " " + user.lastName}'s Reviews</h1>
+        <Card elevation={6}>
+            <CardMedia
+                style={{height: 0}}
+                
+            />
         <CardContent>
             <Grid container spacing={3} style={{width: '100%'}}>
                 {Array.from(reviews)?.map((review, i) => (
@@ -64,6 +69,7 @@ const MyReviews = () => {
                         
             </Grid>
         </CardContent>
+        </Card>
         </>   
     );
     } else {
